@@ -17,6 +17,9 @@ dependencies {
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation group: 'io.micronaut', name: 'micronaut-validation', version: '3.10.3'
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final"
+    compileOnly "org.mapstruct:mapstruct:1.5.3.Final"
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.yaml:snakeyaml")
