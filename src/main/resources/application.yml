@@ -1,0 +1,7 @@
+micronaut:
+    application:
+        name: movies-web-service
+
+tmdb-client:
+    api:
+        url: https://api.themoviedb.org/3
