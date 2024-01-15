@@ -1,5 +1,7 @@
 package com.lulugyda.clients;
 
+import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
+import io.micronaut.context.annotation.Value;
 import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import io.micronaut.http.HttpResponse;
 import jakarta.inject.Singleton;
@@ -13,9 +15,13 @@ public class TmdbClientFacade {
 
     private final TmdbClient tmdbClient;
 
-    public TmdbMovieDetailsResponse getMovieDetails(String authorization, String movieId){
+
+    @Value("${tmdb.token}")
+    private String token;
+
+    public TmdbMovieDetailsResponse getMovieDetails(String movieId){
         try {
-            HttpResponse<TmdbMovieDetailsResponse> response = tmdbClient.getMovieDetails(authorization, movieId);
+            HttpResponse<TmdbMovieDetailsResponse> response = tmdbClient.getMovieDetails(token, movieId);
 
             if (response.getBody().isEmpty()) {
             }
@@ -26,5 +32,13 @@ public class TmdbClientFacade {
         }
     }
 
+
+
+    public TmdbMovieListResponse getMovieList(String page) {
+
+       HttpResponse<TmdbMovieListResponse> response = tmdbClient.getMovieList(token,page);
+
+        return response.body();
+    }
 
 }

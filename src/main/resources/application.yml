@@ -1,7 +1,20 @@
 micronaut:
     application:
         name: movies-web-service
-
+    router:
+        static-resources:
+            swagger:
+                paths: classpath:META-INF/swagger
+                mapping: /swagger/**
+            swagger-ui:
+                paths: classpath:META-INF/swagger/views/swagger-ui
+                mapping: /swagger-ui/**
+            design:
+                paths: "classpath:design"
+                mapping: /design/**
 tmdb-client:
     api:
         url: https://api.themoviedb.org/3
+
+tmdb:
+    token: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjgwZGZjZDcyNWZhNTg0NGE0NDdlMTA5Y2VlZjBhOSIsInN1YiI6IjY1YTNhZDUwMzliNmMzMDBjMTc3YjhiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E2gRJmvcOm8MacFQClD_Gu_FhyDX06kBNNjZr4_v6I4
