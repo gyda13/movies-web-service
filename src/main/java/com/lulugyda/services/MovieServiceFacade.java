@@ -23,6 +23,9 @@ public class MovieServiceFacade implements MovieService {
     }
     @Override
     public MovieDetailsResponse getMovieDetails(String movieId) {
+        TmdbMovieListResponse similarMoviesResponse =  tmdbClientFacade.getSimilarMovies(movieId);
+        System.out.println(similarMoviesResponse);
+
         return TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(
                 tmdbClientFacade.getMovieDetails(movieId));
 

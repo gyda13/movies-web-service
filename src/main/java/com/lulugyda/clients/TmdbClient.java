@@ -20,7 +20,9 @@ public interface TmdbClient {
     HttpResponse<TmdbMovieListResponse> getMovieList(@Header(value = AUTHORIZATION) String authorization,
                                                      @QueryValue(value = "page") String page);
 
-
+    @Get(value = "/movie/{movie_id}/similar", produces = APPLICATION_JSON)
+    HttpResponse<TmdbMovieListResponse> getSimilarMovies(@Header(value = AUTHORIZATION) String authorization,
+                                                         @PathVariable(value = "movie_id") String movieId);
     @Get(value = "/movie/{movie_id}", produces = APPLICATION_JSON)
     HttpResponse<TmdbMovieDetailsResponse> getMovieDetails(
             @Header(value = AUTHORIZATION) String authorization,
