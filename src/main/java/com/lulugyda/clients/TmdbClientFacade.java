@@ -41,4 +41,11 @@ public class TmdbClientFacade {
         return response.body();
     }
 
+    public TmdbMovieListResponse getSimilarMovies( String movieId) {
+
+        HttpResponse<TmdbMovieListResponse> response = tmdbClient.getSimilarMovies(token, movieId);
+
+        return response.body();
+    }
+
 }
