@@ -1,4 +1,4 @@
-package com.lulugyda.clients.models.responses;
+package com.lulugyda.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.Introspected;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Introspected
 @Serdeable
-public class TmdbResultsResponse {
+public class ResultsResponse {
 
     @JsonProperty("id")
     private String id;
@@ -22,6 +22,6 @@ public class TmdbResultsResponse {
     @JsonProperty("title")
     private String title;
 
-    @JsonProperty("vote_average")
-    private String voteAverage;
+    @JsonProperty("above_average")
+    private boolean isAboveAverage;
 }
