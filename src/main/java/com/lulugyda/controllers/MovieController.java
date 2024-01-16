@@ -1,6 +1,6 @@
 package com.lulugyda.controllers;
 
-import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
+import com.lulugyda.models.responses.MovieListResponse;
 import com.lulugyda.services.MovieService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
@@ -26,10 +26,10 @@ public class MovieController {
 
     @Get(produces = APPLICATION_JSON)
     @ExecuteOn(TaskExecutors.IO)
-    HttpResponse<TmdbMovieListResponse> getMovieList(@QueryValue String page) {
-
+    HttpResponse<MovieListResponse> getMovieList(@QueryValue String page) {
         return HttpResponse.ok(movieService.getMovieList(page));
     }
+
     @Get(value = "/{movieId}")
     @ExecuteOn(TaskExecutors.BLOCKING)
     public HttpResponse<MovieDetailsResponse> getMovieDetails(@PathVariable(value = "movieId") String movieId) {
