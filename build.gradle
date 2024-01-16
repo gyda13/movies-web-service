@@ -25,6 +25,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.yaml:snakeyaml")
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
 }
 
 

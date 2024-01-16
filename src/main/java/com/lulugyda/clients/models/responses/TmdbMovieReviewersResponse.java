@@ -10,24 +10,25 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Introspected
 @Serdeable
-public class TmdbMovieListResponse {
+public class TmdbMovieReviewersResponse {
 
     @JsonProperty("page")
     private String page;
 
     @JsonProperty("results")
-    private List<TmdbResultsResponse> results;
+    private List<TmdbReviewersResultListResponse> results;
 
     @JsonProperty("total_pages")
-    private String total_pages;
+    private String totalPages;
 
     @JsonProperty("total_results")
-    private String total_results;
+    private String totalResults;
 
 }

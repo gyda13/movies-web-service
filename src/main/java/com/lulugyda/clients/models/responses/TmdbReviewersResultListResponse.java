@@ -8,26 +8,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Introspected
 @Serdeable
-public class TmdbMovieListResponse {
+public class TmdbReviewersResultListResponse {
 
-    @JsonProperty("page")
-    private String page;
+    @JsonProperty("author")
+    private String author;
 
-    @JsonProperty("results")
-    private List<TmdbResultsResponse> results;
+    @JsonProperty("author_details")
+    private TmdbMovieReviewerDetailsResponse authorDetails;
 
-    @JsonProperty("total_pages")
-    private String total_pages;
+    @JsonProperty("content")
+    private String content;
 
-    @JsonProperty("total_results")
-    private String total_results;
+    @JsonProperty("created_at")
+    private String createdAt;
 
 }
