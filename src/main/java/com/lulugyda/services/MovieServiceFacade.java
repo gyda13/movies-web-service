@@ -2,6 +2,7 @@ package com.lulugyda.services;
 
 import com.lulugyda.clients.TmdbClientFacade;
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
+import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
 import com.lulugyda.mappers.TmdbMovieDetailsMapper;
 import com.lulugyda.models.responses.MovieDetailsResponse;
 import jakarta.inject.Singleton;
@@ -26,8 +27,13 @@ public class MovieServiceFacade implements MovieService {
         TmdbMovieListResponse similarMoviesResponse =  tmdbClientFacade.getSimilarMovies(movieId);
         System.out.println(similarMoviesResponse);
 
+        TmdbMovieReviewersResponse movieReviewers =  tmdbClientFacade.getMovieReviewers(movieId);
+        System.out.println(movieReviewers);
+
+
         return TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(
                 tmdbClientFacade.getMovieDetails(movieId));
 
     }
+
 }

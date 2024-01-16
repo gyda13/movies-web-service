@@ -3,6 +3,7 @@ package com.lulugyda.clients;
 
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
+import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Header;
@@ -23,8 +24,14 @@ public interface TmdbClient {
     @Get(value = "/movie/{movie_id}/similar", produces = APPLICATION_JSON)
     HttpResponse<TmdbMovieListResponse> getSimilarMovies(@Header(value = AUTHORIZATION) String authorization,
                                                          @PathVariable(value = "movie_id") String movieId);
+
     @Get(value = "/movie/{movie_id}", produces = APPLICATION_JSON)
     HttpResponse<TmdbMovieDetailsResponse> getMovieDetails(
+            @Header(value = AUTHORIZATION) String authorization,
+            @PathVariable(value = "movie_id") String movieId);
+
+    @Get(value = "/movie/{movie_id}/reviews", produces = APPLICATION_JSON)
+    HttpResponse<TmdbMovieReviewersResponse> getMovieReviewers (
             @Header(value = AUTHORIZATION) String authorization,
             @PathVariable(value = "movie_id") String movieId);
 

@@ -1,6 +1,7 @@
 package com.lulugyda.clients;
 
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
+import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
 import io.micronaut.context.annotation.Value;
 import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import io.micronaut.http.HttpResponse;
@@ -46,6 +47,19 @@ public class TmdbClientFacade {
         HttpResponse<TmdbMovieListResponse> response = tmdbClient.getSimilarMovies(token, movieId);
 
         return response.body();
+    }
+
+    public TmdbMovieReviewersResponse getMovieReviewers(String movieId){
+        try {
+            HttpResponse<TmdbMovieReviewersResponse> response = tmdbClient.getMovieReviewers(token, movieId);
+
+            if (response.getBody().isEmpty()) {
+            }
+
+            return response.getBody().orElse(null);
+        } catch (Exception exception) {
+            throw exception;
+        }
     }
 
 }
