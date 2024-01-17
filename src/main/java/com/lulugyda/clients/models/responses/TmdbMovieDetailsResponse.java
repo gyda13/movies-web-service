@@ -2,6 +2,7 @@ package com.lulugyda.clients.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.Introspected;
+import io.micronaut.serde.annotation.Serdeable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Introspected
+@Serdeable
 public class TmdbMovieDetailsResponse {
 
     @JsonProperty("adult")

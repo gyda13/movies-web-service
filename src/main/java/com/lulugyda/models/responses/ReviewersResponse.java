@@ -1,4 +1,4 @@
-package com.lulugyda.clients.models.responses;
+package com.lulugyda.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.Introspected;
@@ -14,9 +14,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Introspected
 @Serdeable
-public class TmdbMovieReviewerDetailsResponse {
+public class ReviewersResponse {
+
+    @JsonProperty("author")
+    private String author;
 
     @JsonProperty("rating")
     private Double rating;
+
+    @JsonProperty("content")
+    private String content;
+
+    @JsonProperty("created_at")
+    private String createdAt;
 
 }
