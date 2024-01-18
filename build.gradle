@@ -2,6 +2,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.2.1"
     id("io.micronaut.aot") version "4.2.1"
+    id 'checkstyle'
 }
 
 version = "0.1"
@@ -9,6 +10,11 @@ group = "com.lulugyda"
 
 repositories {
     mavenCentral()
+}
+
+project.checkstyle {
+    toolVersion '8.40'
+    configFile project.file("${project.rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 dependencies {
