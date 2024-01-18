@@ -1,7 +1,6 @@
 package com.lulugyda.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.lulugyda.clients.models.responses.TmdbGenresResponse;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.serde.annotation.Serdeable;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -46,7 +45,7 @@ public class MovieDetailsResponse {
 
     @Schema(name = "Genres")
     @JsonProperty("genres")
-    private List<TmdbGenresResponse> genres;
+    private List<GenresResponse> genres;
 
     @Schema(name = "VoteAverage")
     @JsonProperty("vote_average")
@@ -62,6 +61,6 @@ public class MovieDetailsResponse {
 
     @Schema(name = "Reviewers")
     @JsonProperty("reviewers")
-    private List<ReviewersResponse> reviewers;
+    private MovieReviewersResponse reviewers;
 
 }
