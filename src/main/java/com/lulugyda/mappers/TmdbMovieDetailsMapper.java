@@ -25,7 +25,7 @@ public interface TmdbMovieDetailsMapper {
     MovieReviewersResponse maoToMovieReviewersResponse(
             TmdbMovieReviewersResponse tmdbMovieReviewersResponse);
 
-    @Mapping(target = "movieReviewerDetailsResponse", source = "tmdbMovieReviewerDetailsResponse")
+    @Mapping(target = "rating", source = "tmdbMovieReviewerDetailsResponse.rating")
     ReviewersResultListResponse mapToReviewersResultListResponse(
             TmdbReviewersResultListResponse tmdbReviewersResultListResponse);
 
