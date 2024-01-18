@@ -14,18 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Introspected
 @Serdeable
-public class ReviewersResponse {
+public class GenresResponse {
 
-    @JsonProperty("author")
-    private String author;
+    @JsonProperty("id")
+    private String id;
 
-    @JsonProperty("rating")
-    private Double rating;
-
-    @JsonProperty("content")
-    private String content;
-
-    @JsonProperty("created_at")
-    private String createdAt;
+    @JsonProperty("name")
+    private String name;
 
 }
