@@ -20,7 +20,7 @@ public class TmdbClientFacade {
     @Value("${tmdb.token}")
     private String token;
 
-    public TmdbMovieDetailsResponse getMovieDetails(String movieId){
+    public TmdbMovieDetailsResponse getMovieDetails(String movieId) {
         try {
             HttpResponse<TmdbMovieDetailsResponse> response = tmdbClient.getMovieDetails(token, movieId);
 
