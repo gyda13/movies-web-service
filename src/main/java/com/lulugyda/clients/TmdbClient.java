@@ -31,7 +31,7 @@ public interface TmdbClient {
             @PathVariable(value = "movie_id") String movieId);
 
     @Get(value = "/movie/{movie_id}/reviews", produces = APPLICATION_JSON)
-    HttpResponse<TmdbMovieReviewersResponse> getMovieReviewers (
+    HttpResponse<TmdbMovieReviewersResponse> getMovieReviewers(
             @Header(value = AUTHORIZATION) String authorization,
             @PathVariable(value = "movie_id") String movieId);
 
