@@ -37,19 +37,19 @@ public class TmdbClientFacade {
 
     public TmdbMovieListResponse getMovieList(String page) {
 
-       HttpResponse<TmdbMovieListResponse> response = tmdbClient.getMovieList(token,page);
+       HttpResponse<TmdbMovieListResponse> response = tmdbClient.getMovieList(token, page);
 
         return response.body();
     }
 
-    public TmdbMovieListResponse getSimilarMovies( String movieId) {
+    public TmdbMovieListResponse getSimilarMovies(String movieId) {
 
         HttpResponse<TmdbMovieListResponse> response = tmdbClient.getSimilarMovies(token, movieId);
 
         return response.body();
     }
 
-    public TmdbMovieReviewersResponse getMovieReviewers(String movieId){
+    public TmdbMovieReviewersResponse getMovieReviewers(String movieId) {
         try {
             HttpResponse<TmdbMovieReviewersResponse> response = tmdbClient.getMovieReviewers(token, movieId);
 
