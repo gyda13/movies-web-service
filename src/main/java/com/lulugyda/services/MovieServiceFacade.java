@@ -32,7 +32,8 @@ public class MovieServiceFacade implements MovieService {
 
         TmdbMovieDetailsResponse movieDetails = tmdbClientFacade.getMovieDetails(movieId);
 
-        MovieDetailsResponse movieDetailsResponse = TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(movieDetails);
+        MovieDetailsResponse movieDetailsResponse =
+                TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(movieDetails);
         movieDetailsResponse.setReviewers(TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers));
 
         return movieDetailsResponse;

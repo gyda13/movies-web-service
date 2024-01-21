@@ -25,9 +25,9 @@ public class TmdbMovieListResponse {
     private List<TmdbResultsResponse> results;
 
     @JsonProperty("total_pages")
-    private String total_pages;
+    private String totalPages;
 
     @JsonProperty("total_results")
-    private String total_results;
+    private String totalResults;
 
 }
