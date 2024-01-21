@@ -1,4 +1,4 @@
-package com.lulugyda;
+package com.lulugyda.filters;
 
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;
@@ -12,16 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Filter("/**")
-public class filter implements HttpServerFilter {
-    private static final Logger log = LoggerFactory.getLogger(filter.class);
+public class LoggingFilter implements HttpServerFilter {
+    private static final Logger log = LoggerFactory.getLogger(LoggingFilter.class);
 
     @Override
     public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
-        return Flowable.defer(() -> filterRequest(request, chain)).subscribeOn(Schedulers.io());
-    }
-
-    public Publisher<MutableHttpResponse<?>> filterRequest(HttpRequest<?> request, ServerFilterChain chain) {
-
         return Flowable.defer(() -> {
             log.info("Before processing request: {}", request.getPath());
             return chain.proceed(request);
@@ -33,5 +28,4 @@ public class filter implements HttpServerFilter {
             log.info("After processing request: {}, Status: {}", request.getPath(), response.getStatus());
         });
     }
-
 }

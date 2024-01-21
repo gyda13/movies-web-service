@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -62,5 +63,9 @@ public class MovieDetailsResponse {
     @Schema(name = "Reviewers")
     @JsonProperty("reviewers")
     private MovieReviewersResponse reviewers;
+
+    @Schema(name = "Similar_Movies")
+    @JsonProperty("similar_Movies")
+    private ArrayList<ResultsResponse> similarMovies;
 
 }

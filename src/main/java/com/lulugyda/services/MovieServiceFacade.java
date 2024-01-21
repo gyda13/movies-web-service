@@ -26,7 +26,6 @@ public class MovieServiceFacade implements MovieService {
     @Override
     public MovieDetailsResponse getMovieDetails(String movieId) {
         TmdbMovieListResponse similarMoviesResponse =  tmdbClientFacade.getSimilarMovies(movieId);
-        System.out.println(similarMoviesResponse);
 
         TmdbMovieReviewersResponse movieReviewers = tmdbClientFacade.getMovieReviewers(movieId);
 
@@ -34,10 +33,13 @@ public class MovieServiceFacade implements MovieService {
 
         MovieDetailsResponse movieDetailsResponse =
                 TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(movieDetails);
-        movieDetailsResponse.setReviewers(TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers));
+
+        movieDetailsResponse.setReviewers(
+                TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers));
+        movieDetailsResponse.setSimilarMovies(
+                TmdbMovieDetailsMapper.INSTANCE.mapToMovieListResponse(similarMoviesResponse).getResults());
 
         return movieDetailsResponse;
-
     }
 
 }
