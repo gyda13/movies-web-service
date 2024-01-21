@@ -29,6 +29,8 @@ public interface TmdbMovieDetailsMapper {
     ReviewersResultListResponse mapToReviewersResultListResponse(
             TmdbReviewersResultListResponse tmdbReviewersResultListResponse);
 
+    MovieDetailsResponse mapToMovieDetailsResponse(TmdbMovieDetailsResponse tmdbMovieDetailsResponse);
+
     default boolean calc(TmdbResultsResponse tmdbResultsResponse) {
         return Double.parseDouble(tmdbResultsResponse.getVoteAverage()) > 5;
     }

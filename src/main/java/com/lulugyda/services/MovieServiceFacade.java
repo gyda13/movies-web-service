@@ -32,24 +32,10 @@ public class MovieServiceFacade implements MovieService {
 
         TmdbMovieDetailsResponse movieDetails = tmdbClientFacade.getMovieDetails(movieId);
 
-        return buildMovieDetailsResponse(movieDetails, movieReviewers);
+        MovieDetailsResponse movieDetailsResponse = TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(movieDetails);
+        movieDetailsResponse.setReviewers(TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers));
 
-    }
-
-    private MovieDetailsResponse buildMovieDetailsResponse(TmdbMovieDetailsResponse movieDetails,
-                                                           TmdbMovieReviewersResponse movieReviewers) {
-        return MovieDetailsResponse.builder()
-                .id(movieDetails.getId())
-                .budget(movieDetails.getBudget())
-                .originalTitle(movieDetails.getOriginalTitle())
-                .originalLanguage(movieDetails.getOriginalLanguage())
-                .adult(movieDetails.getAdult())
-                .voteAverage(movieDetails.getVoteAverage())
-                .voteCount(movieDetails.getVoteCount())
-                .releaseDate(movieDetails.getReleaseDate())
-                .genres(TmdbMovieDetailsMapper.INSTANCE.mapToGenresResponse(movieDetails.getGenres()))
-                .status(movieDetails.getStatus())
-                .reviewers(TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers)).build();
+        return movieDetailsResponse;
 
     }
 
