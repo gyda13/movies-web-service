@@ -17,4 +17,4 @@ tmdb-client:
         url: https://api.themoviedb.org/3
 
 tmdb:
-    token: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjgwZGZjZDcyNWZhNTg0NGE0NDdlMTA5Y2VlZjBhOSIsInN1YiI6IjY1YTNhZDUwMzliNmMzMDBjMTc3YjhiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E2gRJmvcOm8MacFQClD_Gu_FhyDX06kBNNjZr4_v6I4
+    token: ${TMBD_TOKEN:`Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjgwZGZjZDcyNWZhNTg0NGE0NDdlMTA5Y2VlZjBhOSIsInN1YiI6IjY1YTNhZDUwMzliNmMzMDBjMTc3YjhiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E2gRJmvcOm8MacFQClD_Gu_FhyDX06kBNNjZr4_v6I4`}
