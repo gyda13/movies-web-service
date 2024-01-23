@@ -11,6 +11,8 @@ import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.lulugyda.utils.Constants.HEADER_X_CORRELATION_ID;
+
 @Filter("/**")
 public class LoggingFilter implements HttpServerFilter {
     private static final Logger log = LoggerFactory.getLogger(LoggingFilter.class);
@@ -18,14 +20,16 @@ public class LoggingFilter implements HttpServerFilter {
     @Override
     public Publisher<MutableHttpResponse<?>> doFilter(HttpRequest<?> request, ServerFilterChain chain) {
         return Flowable.defer(() -> {
-            log.info("Before processing request: {}", request.getPath());
+            log.info("Before processing request: {} , for correlationId: {}", request.getPath(),
+                    request.getHeaders().get(HEADER_X_CORRELATION_ID));
             return chain.proceed(request);
         }).subscribeOn(Schedulers.io()).doOnNext(response -> {
 
             if (response.getBody().isPresent()) {
                 log.info("Response body: {}", response.getBody().get());
             }
-            log.info("After processing request: {}, Status: {}", request.getPath(), response.getStatus());
+            log.info("After processing request: {}, Status: {}, for correlationId: {}", request.getPath(),
+                    response.getStatus(), request.getHeaders().get(HEADER_X_CORRELATION_ID));
         });
     }
 }
