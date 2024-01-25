@@ -23,7 +23,7 @@ public enum ErrorCode {
     //TMDB
     INVALID_API_KEY("0011", "TMDB Client Error - Invalid API Key"),
     EMPTY_BODY_RECEIVED("0012", "TMDB Client Error - Empty Body Received"),
-    MOVIE_DOES_NOT_EXISTS("0013","TMDB Client Error - Movie Does Not Exists");
+    MOVIE_DOES_NOT_EXISTS("0013", "TMDB Client Error - Movie Does Not Exists");
 
 
     @Getter

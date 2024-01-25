@@ -2,6 +2,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.2.1"
     id("io.micronaut.aot") version "4.2.1"
+    id "org.flywaydb.flyway" version "9.8.1"
     id 'checkstyle'
 }
 
@@ -29,15 +30,19 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation group: 'io.micronaut', name: 'micronaut-validation', version: '3.10.3'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("org.flywaydb:flyway-database-postgresql:10.0.1")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation 'org.postgresql:postgresql:x.y.z'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final"
     compileOnly "org.mapstruct:mapstruct:1.5.3.Final"
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.yaml:snakeyaml")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
+    runtimeOnly("io.micronaut.sql:micronaut-jdbc-tomcat")
     testImplementation 'org.mockito:mockito-inline:3.12.4'
-
 }
-
 
 application {
     mainClass.set("com.lulugyda.Application")

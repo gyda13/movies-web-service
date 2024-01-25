@@ -14,6 +14,7 @@ import io.micronaut.http.client.annotation.Client;
 
 import static io.micronaut.http.HttpHeaders.AUTHORIZATION;
 import static io.micronaut.http.MediaType.APPLICATION_JSON;
+
 @Client(value = "${tmdb-client.api.url}", errorType = TmdbErrorResponse.class)
 public interface TmdbClient {
 

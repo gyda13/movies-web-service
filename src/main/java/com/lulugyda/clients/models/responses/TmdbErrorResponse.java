@@ -20,9 +20,9 @@ public class TmdbErrorResponse {
     private boolean success;
 
     @JsonProperty("status_code")
-    private int status_code;
+    private int statusCode;
 
     @JsonProperty("status_message")
-    private String status_message;
+    private String statusMessage;
 
 }
