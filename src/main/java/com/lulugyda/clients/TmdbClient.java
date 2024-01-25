@@ -1,6 +1,7 @@
 package com.lulugyda.clients;
 
 
+import com.lulugyda.clients.models.responses.TmdbErrorResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
@@ -13,8 +14,7 @@ import io.micronaut.http.client.annotation.Client;
 
 import static io.micronaut.http.HttpHeaders.AUTHORIZATION;
 import static io.micronaut.http.MediaType.APPLICATION_JSON;
-
-@Client(value = "${tmdb-client.api.url}")
+@Client(value = "${tmdb-client.api.url}", errorType = TmdbErrorResponse.class)
 public interface TmdbClient {
 
     @Get(value = "/discover/movie", produces = APPLICATION_JSON)

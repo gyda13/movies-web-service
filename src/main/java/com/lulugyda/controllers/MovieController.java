@@ -28,11 +28,18 @@ public class MovieController {
     private final MovieService movieService;
 
     @Get(produces = APPLICATION_JSON)
+    @Operation(description = "Discover Movies")
+    @ApiResponse(responseCode = "200", description = "Success - Movie Details",
+            content = @Content(schema = @Schema(implementation = MovieListResponse.class)))
+    @ApiResponse(responseCode = "400", description = "Bad Request")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "500", description = "Internal Server Error")
     @ExecuteOn(TaskExecutors.IO)
     HttpResponse<MovieListResponse> getMovieList(
-            @QueryValue String page,
+            @QueryValue(defaultValue = "1") String page,
             @Header(HEADER_X_CORRELATION_ID) String correlationId) {
-        return HttpResponse.ok(movieService.getMovieList(page));
+        MovieListResponse response = movieService.getMovieList(page);
+        return HttpResponse.ok(response);
     }
 
     @Get(value = "/{movieId}")

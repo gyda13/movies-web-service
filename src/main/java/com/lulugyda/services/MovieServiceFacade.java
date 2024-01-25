@@ -25,11 +25,13 @@ public class MovieServiceFacade implements MovieService {
 
     @Override
     public MovieDetailsResponse getMovieDetails(String movieId) {
+
+        TmdbMovieDetailsResponse movieDetails = tmdbClientFacade.getMovieDetails(movieId);
+
         TmdbMovieListResponse similarMoviesResponse =  tmdbClientFacade.getSimilarMovies(movieId);
 
         TmdbMovieReviewersResponse movieReviewers = tmdbClientFacade.getMovieReviewers(movieId);
 
-        TmdbMovieDetailsResponse movieDetails = tmdbClientFacade.getMovieDetails(movieId);
 
         MovieDetailsResponse movieDetailsResponse =
                 TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(movieDetails);
