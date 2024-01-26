@@ -9,10 +9,8 @@ import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import static com.lulugyda.utils.Constants.HEADER_X_CORRELATION_ID;
+
 @Slf4j
 @Filter("/**")
 public class ControllerLoggingFilter implements HttpServerFilter {
