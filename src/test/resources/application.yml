@@ -1,0 +1,24 @@
+micronaut:
+  application:
+    name: movies-web-service
+tmdb:
+  token: ${TMBD_TOKEN:`Bearer ey4_v6I4`}
+
+flyway:
+  enabled: true
+  datasources:
+    default:
+      enabled: true
+      baseline-on-migrate: true
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+
+application:
+  version: 1.0
+  tag: test

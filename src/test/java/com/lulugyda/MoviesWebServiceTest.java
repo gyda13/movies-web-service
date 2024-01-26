@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 
 import jakarta.inject.Inject;
 
-@MicronautTest(transactional=false)
+@MicronautTest(transactional = false)
 class MoviesWebServiceTest {
 
     @Inject
