@@ -11,13 +11,15 @@ public class TmdbException {
         if (exception instanceof HttpClientResponseException e) {
             TmdbErrorResponse errorResponse = e.getResponse().getBody(TmdbErrorResponse.class).get();
 
-            switch (errorResponse.getStatus_code()) {
+            switch (errorResponse.getStatusCode()) {
                 case 7:
                     throw new MovieException(ErrorCode.INVALID_API_KEY.getId(),
                             ErrorCode.INVALID_API_KEY.getMessage());
                 case 34:
                     throw new MovieException(ErrorCode.MOVIE_DOES_NOT_EXISTS.getId(),
                             ErrorCode.MOVIE_DOES_NOT_EXISTS.getMessage());
+
+                default: throw new RuntimeException();
             }
         }
         throw new RuntimeException();
