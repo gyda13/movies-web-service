@@ -25,8 +25,8 @@ Send users weekly email with popular movies</br>
 <h1>Topics:</h1>
 unit/integration testing </br>
 DB with flyway</br>
-Validation </br>
-Exception Handler (db exception, TMDB client exception ✅ )</br>
+Validation ✅ </br>
+Exception Handler (db exception, TMDB client exception ✅, validation exception ✅)</br>
 logging ✅ </br>
 Auth - JWT</br>
 Redis (list of movies)(with cronjob to update every end of date)</br>
@@ -37,3 +37,8 @@ Fiels - FTP</br>
 <h1>End Points:</h1>
 GET v1/movies </br>
 GET v1/movies/{id} </br>
+
+<h1>Database</h1>
+<img src="dbDesign.png" width="300" height="300"> 
+
+
