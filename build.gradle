@@ -27,7 +27,6 @@ dependencies {
     implementation "io.swagger.core.v3:swagger-annotations:2.2.2"
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation group: 'io.micronaut', name: 'micronaut-validation', version: '3.10.3'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final"
     compileOnly "org.mapstruct:mapstruct:1.5.3.Final"
@@ -35,6 +34,16 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.yaml:snakeyaml")
     testImplementation 'org.mockito:mockito-inline:3.12.4'
+
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.validation:micronaut-validation")
+    implementation("jakarta.validation:jakarta.validation-api")
+    compileOnly("io.micronaut:micronaut-http-client")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    testImplementation("io.micronaut:micronaut-http-client")
 
 }
 
