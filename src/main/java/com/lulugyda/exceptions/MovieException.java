@@ -1,4 +1,4 @@
-package com.lulugyda;
+package com.lulugyda.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
-package com.lulugyda;
+package com.lulugyda.exceptions;
 
-import com.lulugyda.utils.ErrorCode;
-import com.lulugyda.utils.UnifiedErrorResponse;
+import com.lulugyda.exceptions.models.ErrorCode;
+import com.lulugyda.exceptions.models.UnifiedErrorResponse;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
@@ -19,7 +19,7 @@ public class GenericExceptionHandler implements ExceptionHandler<Exception, Http
     @Override
     public HttpResponse<UnifiedErrorResponse> handle(HttpRequest request, Exception exception) {
         return HttpResponse.notFound(UnifiedErrorResponse.builder()
-                .message(ErrorCode.INTERNAL_SERVER_ERROR.getMessage())
+                .generalMessage(ErrorCode.INTERNAL_SERVER_ERROR.getMessage())
                 .id(ErrorCode.INTERNAL_SERVER_ERROR.getId())
                 .build());
     }
