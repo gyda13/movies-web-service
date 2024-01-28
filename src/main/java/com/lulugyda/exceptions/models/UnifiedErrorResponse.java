@@ -1,4 +1,4 @@
-package com.lulugyda.utils;
+package com.lulugyda.exceptions.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.core.annotation.Introspected;
@@ -20,5 +20,8 @@ public class UnifiedErrorResponse {
 
     @JsonProperty("message")
     private String message;
+
+    @JsonProperty("generalMessage")
+    private String generalMessage;
 
 }

@@ -1,4 +1,4 @@
-package com.lulugyda.utils;
+package com.lulugyda.exceptions.models;
 
 import io.micronaut.serde.annotation.Serdeable;
 import lombok.AllArgsConstructor;

@@ -28,7 +28,6 @@ dependencies {
     implementation "io.swagger.core.v3:swagger-annotations:2.2.2"
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation group: 'io.micronaut', name: 'micronaut-validation', version: '3.10.3'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("org.flywaydb:flyway-database-postgresql:10.0.1")
@@ -42,6 +41,17 @@ dependencies {
     runtimeOnly("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("io.micronaut.sql:micronaut-jdbc-tomcat")
     testImplementation 'org.mockito:mockito-inline:3.12.4'
+
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.validation:micronaut-validation")
+    implementation("jakarta.validation:jakarta.validation-api")
+    compileOnly("io.micronaut:micronaut-http-client")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    testImplementation("io.micronaut:micronaut-http-client")
+
 }
 
 application {

@@ -1,7 +1,6 @@
-package com.lulugyda;
+package com.lulugyda.exceptions;
 
-import com.lulugyda.clients.models.responses.TmdbErrorResponse;
-import com.lulugyda.utils.UnifiedErrorResponse;
+import com.lulugyda.exceptions.models.UnifiedErrorResponse;
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
@@ -18,7 +17,7 @@ public class MovieExceptionHandler implements ExceptionHandler<MovieException, H
     public HttpResponse handle(HttpRequest request, MovieException exception) {
 
         return HttpResponse.notFound(UnifiedErrorResponse.builder()
-                .message(exception.message)
+                .generalMessage(exception.message)
                 .id(exception.id)
                 .build());
     }

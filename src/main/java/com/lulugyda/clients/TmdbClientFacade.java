@@ -1,9 +1,9 @@
 package com.lulugyda.clients;
 
-import com.lulugyda.MovieException;
+import com.lulugyda.exceptions.MovieException;
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
-import com.lulugyda.utils.ErrorCode;
+import com.lulugyda.exceptions.models.ErrorCode;
 import io.micronaut.context.annotation.Value;
 import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import io.micronaut.http.HttpResponse;
@@ -11,7 +11,7 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.lulugyda.TmdbException.handleTmdbException;
+import static com.lulugyda.exceptions.TmdbException.handleTmdbException;
 
 @Singleton
 @Slf4j

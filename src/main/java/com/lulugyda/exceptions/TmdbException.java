@@ -1,7 +1,7 @@
-package com.lulugyda;
+package com.lulugyda.exceptions;
 
 import com.lulugyda.clients.models.responses.TmdbErrorResponse;
-import com.lulugyda.utils.ErrorCode;
+import com.lulugyda.exceptions.models.ErrorCode;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import lombok.extern.slf4j.Slf4j;
 
