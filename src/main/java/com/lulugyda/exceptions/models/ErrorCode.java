@@ -23,8 +23,12 @@ public enum ErrorCode {
     //TMDB
     INVALID_API_KEY("0011", "TMDB Client Error - Invalid API Key"),
     EMPTY_BODY_RECEIVED("0012", "TMDB Client Error - Empty Body Received"),
-    MOVIE_DOES_NOT_EXISTS("0013", "TMDB Client Error - Movie Does Not Exists");
+    MOVIE_DOES_NOT_EXISTS("0013", "TMDB Client Error - Movie Does Not Exists"),
 
+    //DB
+    CANNOT_CONNECT_TO_DB("0051", "UK.CUSTOMER.LOST_CONNECTION"),
+    DB_OPERATION_NOT_PERMITTED("0052", "UK.CUSTOMER.DB_OPERATION_NOT_PERMITTED"),
+    DB_CONSTRAINT_VIOLATED("0053", "UK.CUSTOMER.DB_CONSTRAINT_VIOLATED");
 
     @Getter
     private String id;
