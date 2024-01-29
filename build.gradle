@@ -33,6 +33,7 @@ dependencies {
     implementation("org.flywaydb:flyway-database-postgresql:10.0.1")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation 'org.postgresql:postgresql:x.y.z'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.3.Final"
     compileOnly "org.mapstruct:mapstruct:1.5.3.Final"
     compileOnly("org.projectlombok:lombok")
