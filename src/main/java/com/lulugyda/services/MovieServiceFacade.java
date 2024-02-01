@@ -7,6 +7,8 @@ import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
 import com.lulugyda.mappers.TmdbMovieDetailsMapper;
 import com.lulugyda.models.responses.MovieDetailsResponse;
 import com.lulugyda.models.responses.MovieListResponse;
+import com.lulugyda.repositories.PhoneNumbersCrudRepositoryFacade;
+import com.lulugyda.repositories.UsersCrudRepositoryFacade;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MovieServiceFacade implements MovieService {
 
     private final TmdbClientFacade tmdbClientFacade;
+    private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
+    private final PhoneNumbersCrudRepositoryFacade phoneNumbersCrudRepositoryFacade;
 
     @Override
     public MovieListResponse getMovieList(String page) {

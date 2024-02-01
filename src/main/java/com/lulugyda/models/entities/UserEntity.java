@@ -4,20 +4,17 @@ import io.micronaut.core.annotation.Introspected;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.List;
 
+@Setter
+@Getter
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Data
 @Builder
 @AllArgsConstructor
@@ -26,7 +23,8 @@ import java.util.List;
 public class UserEntity {
 
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", unique = true, nullable = false)
     private String id;
 
     @Column(name = "username")
@@ -38,8 +36,7 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private List<PhoneNumberEntity> phoneNumbers;
 
 }

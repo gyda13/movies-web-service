@@ -1,18 +1,18 @@
 package com.lulugyda.models.entities;
 
 import io.micronaut.core.annotation.Introspected;
-import io.micronaut.core.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
-@Table(name = "Phone_Numbers")
+@Table(name = "phone_numbers")
 @Data
 @Builder
 @AllArgsConstructor
@@ -21,16 +21,16 @@ import javax.persistence.Table;
 public class PhoneNumberEntity {
 
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", unique = true, nullable = false)
     private String id;
 
-    @Nullable
-    @Column(name = "user_id")
-    private String user_id;
-
-    @Nullable
     @Column(name = "mobile_number")
     private String mobileNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_users"))
+    private UserEntity user;
 
 }

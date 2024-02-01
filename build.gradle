@@ -49,9 +49,12 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.validation:micronaut-validation")
     implementation("jakarta.validation:jakarta.validation-api")
+    implementation("io.micronaut.data:micronaut-data-hibernate-reactive")
+    implementation("io.vertx:vertx-mysql-client")
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation 'com.h2database:h2'
 
 }
 
