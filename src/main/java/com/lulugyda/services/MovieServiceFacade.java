@@ -9,6 +9,7 @@ import com.lulugyda.models.responses.MovieDetailsResponse;
 import com.lulugyda.models.responses.MovieListResponse;
 import com.lulugyda.repositories.PhoneNumbersCrudRepositoryFacade;
 import com.lulugyda.repositories.UsersCrudRepositoryFacade;
+import com.lulugyda.repositories.*;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ public class MovieServiceFacade implements MovieService {
     private final TmdbClientFacade tmdbClientFacade;
     private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
     private final PhoneNumbersCrudRepositoryFacade phoneNumbersCrudRepositoryFacade;
+    private final MoviesCrudRepositoryFacade moviesCrudRepositoryFacade;
 
     @Override
     public MovieListResponse getMovieList(String page) {
@@ -47,5 +49,12 @@ public class MovieServiceFacade implements MovieService {
 
         return movieDetailsResponse;
     }
+
+    @Override
+    public void saveUserMovies(String userId) {
+        moviesCrudRepositoryFacade.saveUserMovies(userId);
+    }
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.lulugyda.controllers;
 
+import com.lulugyda.models.entities.UserMoviesEntity;
 import com.lulugyda.models.responses.MovieListResponse;
 import com.lulugyda.services.MovieService;
 import io.micronaut.http.HttpResponse;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import static com.lulugyda.utils.Constants.HEADER_X_CORRELATION_ID;
+import static com.lulugyda.utils.Constants.USER_ID;
 import static io.micronaut.http.MediaType.APPLICATION_JSON;
 import com.lulugyda.models.responses.MovieDetailsResponse;
 import io.micronaut.http.HttpStatus;
@@ -62,4 +64,12 @@ public class MovieController {
         MovieDetailsResponse response = movieService.getMovieDetails(movieId);
         return HttpResponse.status(HttpStatus.valueOf(HttpStatus.OK.getCode())).body(response);
     }
+
+    @Get(value = "/favourites", produces = APPLICATION_JSON)
+    @ExecuteOn(TaskExecutors.IO)
+    public HttpResponse<?> saveUserMovies(@Header(USER_ID) String userId) {
+        movieService.saveUserMovies(userId);
+        return HttpResponse.ok();
+    }
+
 }
