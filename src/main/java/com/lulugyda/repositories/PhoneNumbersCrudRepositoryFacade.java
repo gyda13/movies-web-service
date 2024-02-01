@@ -16,11 +16,11 @@ public class PhoneNumbersCrudRepositoryFacade {
 
     public void savePhoneNumber(PhoneNumberEntity phoneNumberEntity) {
         try {
-            log.info("savePhoneNumber for user id {}", phoneNumberEntity.getUser_id());
+            log.info("savePhoneNumber:: for user id {}", phoneNumberEntity.getUser().getId());
             phoneNumbersCrudRepository.save(phoneNumberEntity);
         } catch (Exception exception) {
             log.error("savePhoneNumber:: Exception when saving user for id {}",
-                    phoneNumberEntity.getUser_id());
+                    phoneNumberEntity.getId());
             handleDatabaseException(exception);
         }
     }

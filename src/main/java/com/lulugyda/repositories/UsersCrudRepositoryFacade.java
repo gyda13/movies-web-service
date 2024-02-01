@@ -14,14 +14,14 @@ public class UsersCrudRepositoryFacade {
 
     private final UsersCrudRepository usersCrudRepository;
 
-    public void saveUser(UserEntity userEntity) {
+    public UserEntity saveUser(UserEntity userEntity) {
         try {
-            log.info("saveUser for user id {}", userEntity.getId());
-            usersCrudRepository.save(userEntity);
+            log.info("saveUser:: saving new user");
+            return  usersCrudRepository.save(userEntity);
         } catch (Exception exception) {
-            log.error("saveUser:: Exception when saving user for id {}",
-                    userEntity.getId());
+            log.error("saveUser:: Exception when saving a new user");
            handleDatabaseException(exception);
+           return null;
         }
     }
 }

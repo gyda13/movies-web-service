@@ -1,6 +1,6 @@
 CREATE TABLE Phone_Numbers (
-    id            serial PRIMARY KEY,
-    user_id       INT     NOT NULL,
+    id            varchar(255) PRIMARY KEY,
+    user_id       varchar(255)  NOT NULL,
     mobile_number varchar NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users (id)
+    CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES Users(id)
 );
