@@ -5,6 +5,8 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
 
 @Slf4j
@@ -24,4 +26,31 @@ public class UsersCrudRepositoryFacade {
            return null;
         }
     }
+
+    public Optional<UserEntity> findUser(String userId) {
+        Optional<UserEntity> userEntity = Optional.empty();
+
+        try {
+            log.info("findUser for user id {}", userId);
+            userEntity = usersCrudRepository.findById(userId);
+        } catch (Exception exception) {
+            log.error("findUser:: Exception when finding user for id {}",
+                    userId);
+            handleDatabaseException(exception);
+        }
+        return userEntity;
+    }
+
+    public void updateUser(UserEntity user) {
+        try {
+            log.info("updateUser for user id {}", user.getId());
+            usersCrudRepository.update(user);
+
+        } catch (Exception exception) {
+            log.error("updateUser:: Exception when updating user for id {}",
+                    user.getId());
+            handleDatabaseException(exception);
+        }
+    }
+
 }

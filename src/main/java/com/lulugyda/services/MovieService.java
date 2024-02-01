@@ -8,4 +8,6 @@ public interface MovieService {
 
     MovieDetailsResponse getMovieDetails(String movieId);
 
+    void saveUserMovies(String userId);
+
 }
