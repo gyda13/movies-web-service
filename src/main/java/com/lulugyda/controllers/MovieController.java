@@ -1,7 +1,7 @@
 package com.lulugyda.controllers;
 
+import com.lulugyda.models.dtos.MovieEntityDto;
 import com.lulugyda.models.entities.MovieEntity;
-import com.lulugyda.models.entities.UserMoviesEntity;
 import com.lulugyda.models.responses.MovieListResponse;
 import com.lulugyda.services.MovieService;
 import io.micronaut.http.HttpResponse;
@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import static com.lulugyda.utils.Constants.HEADER_X_CORRELATION_ID;
 import static com.lulugyda.utils.Constants.USER_ID;
@@ -76,5 +75,16 @@ public class MovieController {
         List<MovieEntity> movies = movieService.saveUserMovies(userId, movieEntity);
         return HttpResponse.ok(movies);
     }
+
+    @Get(value = "/favourites", produces = APPLICATION_JSON)
+    @ExecuteOn(TaskExecutors.IO)
+    public HttpResponse<List<MovieEntityDto>> findUserMovies(
+            @Header(USER_ID) Integer userId,
+            @Header(HEADER_X_CORRELATION_ID) String correlationId) {
+        List<MovieEntityDto> movies = movieService.findUserMovies(userId);
+        return HttpResponse.ok(movies);
+    }
+
+
 
 }

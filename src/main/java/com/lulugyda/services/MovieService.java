@@ -1,5 +1,6 @@
 package com.lulugyda.services;
 
+import com.lulugyda.models.dtos.MovieEntityDto;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
 import com.lulugyda.models.responses.MovieDetailsResponse;
@@ -18,5 +19,8 @@ public interface MovieService {
     void registerUser (UserEntity userEntity);
 
     void addPhoneNumbers (ArrayList<String> numbers, Integer userّId);
+
+    List<MovieEntityDto> findUserMovies(Integer userId);
+
 
 }

@@ -5,6 +5,7 @@ import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
 import com.lulugyda.mappers.TmdbMovieDetailsMapper;
+import com.lulugyda.models.dtos.MovieEntityDto;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.PhoneNumberEntity;
 import com.lulugyda.models.entities.UserEntity;
@@ -81,5 +82,21 @@ public class MovieServiceFacade implements MovieService {
                                 .build());
             }
         }
+    }
+
+    @Override
+    public List<MovieEntityDto> findUserMovies(Integer userId) {
+        List<MovieEntity> movies = moviesCrudRepositoryFacade.findUserMovies(userId);
+        List<MovieEntityDto> movieEntityDtos = new ArrayList<>();
+
+        for (MovieEntity movie : movies) {
+            MovieEntityDto movieEntityDto = new MovieEntityDto();
+            movieEntityDto.setMovieId(movie.getMovieId());
+            movieEntityDto.setMovieTitle(movie.getMovieTitle());
+            movieEntityDtos.add(movieEntityDto);
+        }
+
+        return movieEntityDtos;
+
     }
 }
