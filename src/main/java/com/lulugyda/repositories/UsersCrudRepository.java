@@ -5,5 +5,5 @@ import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.repository.CrudRepository;
 
 @Repository
-public interface UsersCrudRepository extends CrudRepository<UserEntity, String> {
+public interface UsersCrudRepository extends CrudRepository<UserEntity, Integer> {
 }

@@ -27,7 +27,7 @@ public class UsersCrudRepositoryFacade {
         }
     }
 
-    public Optional<UserEntity> findUser(String userId) {
+    public Optional<UserEntity> findUser(Integer userId) {
         Optional<UserEntity> userEntity = Optional.empty();
 
         try {

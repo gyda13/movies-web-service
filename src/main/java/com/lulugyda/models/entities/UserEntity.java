@@ -1,5 +1,6 @@
 package com.lulugyda.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.*;
@@ -26,9 +27,9 @@ import java.util.List;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private String id;
+    private Integer id;
 
     @Column(name = "username")
     private String username;

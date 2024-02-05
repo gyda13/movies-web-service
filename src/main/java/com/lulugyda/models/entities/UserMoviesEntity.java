@@ -25,9 +25,9 @@ public class UserMoviesEntity {
 
     @Id
     @Column(name = "user_id")
-    private String userId;
+    private Integer userId;
 
     @Column(name = "movie_id")
-    private String movieId;
+    private Integer movieId;
 
 }

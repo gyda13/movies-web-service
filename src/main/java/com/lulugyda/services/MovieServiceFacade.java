@@ -5,6 +5,8 @@ import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieReviewersResponse;
 import com.lulugyda.mappers.TmdbMovieDetailsMapper;
+import com.lulugyda.models.entities.PhoneNumberEntity;
+import com.lulugyda.models.entities.UserEntity;
 import com.lulugyda.models.responses.MovieDetailsResponse;
 import com.lulugyda.models.responses.MovieListResponse;
 import com.lulugyda.repositories.PhoneNumbersCrudRepositoryFacade;
@@ -13,6 +15,9 @@ import com.lulugyda.repositories.*;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Slf4j
 @Singleton
@@ -51,10 +56,25 @@ public class MovieServiceFacade implements MovieService {
     }
 
     @Override
-    public void saveUserMovies(String userId) {
+    public void saveUserMovies(Integer userId) {
         moviesCrudRepositoryFacade.saveUserMovies(userId);
     }
 
+    @Override
+    public void registerUser(UserEntity userEntity) {
+        usersCrudRepositoryFacade.saveUser(userEntity);
+    }
 
+    @Override
+    public void addPhoneNumbers(ArrayList<PhoneNumberEntity> numbers, Integer userId) {
+        Optional<UserEntity> user = usersCrudRepositoryFacade.findUser(userId);
 
+        if (user.isPresent()) {
+            for (PhoneNumberEntity number : numbers) {
+                number.setUser(user.get());
+                System.out.println(number.getMobileNumber());
+                phoneNumbersCrudRepositoryFacade.savePhoneNumber(number);
+            }
+        }
+    }
 }

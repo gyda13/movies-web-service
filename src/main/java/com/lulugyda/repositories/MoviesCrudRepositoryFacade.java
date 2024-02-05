@@ -22,12 +22,12 @@ public class MoviesCrudRepositoryFacade {
 
     private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
 
-    public void saveUserMovies(String userId) {
+    public void saveUserMovies(Integer userId) {
         try {
             log.info("saveUserMovies for user id {}", userId);
 
-            MovieEntity m1 = new MovieEntity("1", "t1", null);
-            MovieEntity m2 = new MovieEntity("2", "gydaamovie", null);
+            MovieEntity m1 = new MovieEntity(1, "t1", null);
+            MovieEntity m2 = new MovieEntity(2, "gydaamovie", null);
             List<MovieEntity> movies = Arrays.asList(m1, m2);
 
             List<MovieEntity> saveMovies = movies.stream()
