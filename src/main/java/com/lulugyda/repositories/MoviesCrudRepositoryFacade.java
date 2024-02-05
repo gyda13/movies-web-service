@@ -32,12 +32,15 @@ public class MoviesCrudRepositoryFacade {
             Optional<UserEntity> user = usersCrudRepositoryFacade.findUser(userId);
 
             movieEntityList = movieEntity.stream()
-                    .filter(fav -> !moviesCrudRepository.findById(fav.getMovieId()).isPresent())
+                    .filter(fav -> !moviesCrudRepository.findByMovieId(fav.getMovieId()).isPresent())
                     .collect(Collectors.toList());
 
-            movieEntityList = moviesCrudRepository.saveAll(movieEntityList);
+            moviesCrudRepository.saveAll(movieEntityList);
 
-            user.get().setMovieEntity(movieEntity);
+
+            List<MovieEntity> newMoviesList = user.get().getMovieEntity();
+            newMoviesList.addAll(movieEntityList);
+            user.get().setMovieEntity(newMoviesList);
             usersCrudRepositoryFacade.updateUser(user.get());
             return movieEntityList;
 
