@@ -18,11 +18,6 @@ import jakarta.persistence.*;
 @Introspected
 public class UserMoviesEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.UUID)
-//    @Column(name = "id", unique = true, nullable = false)
-//    private String id;
-
     @Id
     @Column(name = "user_id")
     private Integer userId;
