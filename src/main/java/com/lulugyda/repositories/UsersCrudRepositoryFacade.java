@@ -1,5 +1,7 @@
 package com.lulugyda.repositories;
 
+import com.lulugyda.exceptions.MovieException;
+import com.lulugyda.exceptions.models.ErrorCode;
 import com.lulugyda.models.entities.UserEntity;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Optional;
 
 import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
+import static com.lulugyda.utils.Constants.USER_NOT_FOUND;
 
 @Slf4j
 @Singleton
@@ -33,6 +36,9 @@ public class UsersCrudRepositoryFacade {
         try {
             log.info("findUser for user id {}", userId);
             userEntity = usersCrudRepository.findById(userId);
+            if(userEntity.isEmpty()){
+                throw new MovieException(ErrorCode.INTERNAL_SERVER_ERROR.getId(), USER_NOT_FOUND);
+            }
         } catch (Exception exception) {
             log.error("findUser:: Exception when finding user for id {}",
                     userId);

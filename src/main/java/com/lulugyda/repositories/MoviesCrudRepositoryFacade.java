@@ -1,12 +1,14 @@
 package com.lulugyda.repositories;
 
+import com.lulugyda.exceptions.GenericExceptionHandler;
+import com.lulugyda.exceptions.MovieException;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,29 +24,28 @@ public class MoviesCrudRepositoryFacade {
 
     private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
 
-    public void saveUserMovies(Integer userId) {
+    public List<MovieEntity> saveUserMovies(Integer userId, List<MovieEntity> movieEntity) {
+        List<MovieEntity> movieEntityList = new ArrayList<>();
         try {
             log.info("saveUserMovies for user id {}", userId);
 
-            MovieEntity m1 = new MovieEntity(1, "t1", null);
-            MovieEntity m2 = new MovieEntity(2, "gydaamovie", null);
-            List<MovieEntity> movies = Arrays.asList(m1, m2);
+            Optional<UserEntity> user = usersCrudRepositoryFacade.findUser(userId);
 
-            List<MovieEntity> saveMovies = movies.stream()
+            movieEntityList = movieEntity.stream()
                     .filter(fav -> !moviesCrudRepository.findById(fav.getMovieId()).isPresent())
                     .collect(Collectors.toList());
 
-            moviesCrudRepository.saveAll(saveMovies);
+            movieEntityList = moviesCrudRepository.saveAll(movieEntityList);
 
-
-            Optional<UserEntity> user = usersCrudRepositoryFacade.findUser(userId);
-            user.get().setMovieEntity(movies);
+            user.get().setMovieEntity(movieEntity);
             usersCrudRepositoryFacade.updateUser(user.get());
+            return movieEntityList;
 
         } catch (Exception exception) {
             log.error("saveUserMovies:: Exception when saving movies for user id {}", userId);
             handleDatabaseException(exception);
         }
+        return null;
     }
 
 }
