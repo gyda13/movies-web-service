@@ -1,6 +1,7 @@
 package com.lulugyda.models.entities;
 
 import io.micronaut.core.annotation.Introspected;
+import io.micronaut.serde.annotation.SerdeImport;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,12 +19,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Introspected
+@SerdeImport(PhoneNumberEntity.class)
 public class PhoneNumberEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private String id;
+    private Integer id;
 
     @Column(name = "mobile_number")
     private String mobileNumber;

@@ -25,7 +25,6 @@ import io.micronaut.http.HttpStatus;
 
 
 @Controller("v1/movies")
-@Slf4j
 @Validated
 @RequiredArgsConstructor
 public class MovieController {
@@ -67,7 +66,7 @@ public class MovieController {
 
     @Get(value = "/favourites", produces = APPLICATION_JSON)
     @ExecuteOn(TaskExecutors.IO)
-    public HttpResponse<?> saveUserMovies(@Header(USER_ID) String userId) {
+    public HttpResponse<?> saveUserMovies(@Header(USER_ID) Integer userId) {
         movieService.saveUserMovies(userId);
         return HttpResponse.ok();
     }

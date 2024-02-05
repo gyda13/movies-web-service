@@ -25,7 +25,7 @@ public class MovieEntity {
     @Id
     @Column(name = "movie_id", unique = true)
     @JsonProperty("movieId")
-    private String movieId;
+    private Integer movieId;
 
     @Column(name = "movie_title")
     @JsonProperty("movieTitle")
