@@ -37,6 +37,8 @@ Fiels - FTP</br>
 <h1>End Points:</h1>
 GET v1/movies </br>
 GET v1/movies/{id} </br>
+POST v1/users </br>
+POST v1/users/phone-numbers </br>
 
 <h1>Database</h1>
 <img src="dbDesign.png" width="300" height="300"> 
