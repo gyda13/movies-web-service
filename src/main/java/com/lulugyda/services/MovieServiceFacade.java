@@ -63,17 +63,20 @@ public class MovieServiceFacade implements MovieService {
     @Override
     public void registerUser(UserEntity userEntity) {
         usersCrudRepositoryFacade.saveUser(userEntity);
+
     }
 
     @Override
-    public void addPhoneNumbers(ArrayList<PhoneNumberEntity> numbers, Integer userId) {
+    public void addPhoneNumbers(ArrayList<String> numbers, Integer userId) {
         Optional<UserEntity> user = usersCrudRepositoryFacade.findUser(userId);
 
         if (user.isPresent()) {
-            for (PhoneNumberEntity number : numbers) {
-                number.setUser(user.get());
-                System.out.println(number.getMobileNumber());
-                phoneNumbersCrudRepositoryFacade.savePhoneNumber(number);
+            for (String number : numbers) {
+                phoneNumbersCrudRepositoryFacade.savePhoneNumber(
+                        PhoneNumberEntity.builder()
+                                .mobileNumber(number)
+                                .user(user.get())
+                                .build());
             }
         }
     }

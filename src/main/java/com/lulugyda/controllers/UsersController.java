@@ -31,12 +31,12 @@ public class UsersController {
         return HttpResponse.ok();
     }
 
-//    @Post(value = "/phone-numbers", produces = APPLICATION_JSON)
-//    @ExecuteOn(TaskExecutors.IO)
-//    public HttpResponse<?> addPhoneNumbers(@Body ArrayList<PhoneNumberEntity> numbers,
-//                                           @Header(USER_ID) Integer userId) {
-//       movieService.addPhoneNumbers(numbers,userId);
-//        return HttpResponse.ok();
-//    }
+    @Post(value = "/phone-numbers", produces = APPLICATION_JSON)
+    @ExecuteOn(TaskExecutors.IO)
+    public HttpResponse<?> addPhoneNumbers(@Body ArrayList<String> numbers,
+                                           @Header(USER_ID) Integer userId) {
+       movieService.addPhoneNumbers(numbers,userId);
+        return HttpResponse.ok();
+    }
 
 }
