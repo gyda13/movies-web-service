@@ -16,6 +16,6 @@ public interface MovieService {
 
     void registerUser (UserEntity userEntity);
 
-    void addPhoneNumbers (ArrayList<PhoneNumberEntity> numbers, Integer userّId);
+    void addPhoneNumbers (ArrayList<String> numbers, Integer userّId);
 
 }
