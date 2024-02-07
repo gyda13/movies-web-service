@@ -10,6 +10,8 @@ import io.micronaut.http.annotation.Header;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,7 @@ import static io.micronaut.http.MediaType.APPLICATION_JSON;
 @Controller("v1/users")
 @Validated
 @RequiredArgsConstructor
+@Secured(value = SecurityRule.IS_ANONYMOUS)
 public class UsersController {
 
     private final MovieService movieService;
@@ -31,12 +34,12 @@ public class UsersController {
         return HttpResponse.ok();
     }
 
-    @Post(value = "/phone-numbers", produces = APPLICATION_JSON)
-    @ExecuteOn(TaskExecutors.IO)
-    public HttpResponse<?> addPhoneNumbers(@Body ArrayList<String> numbers,
-                                           @Header(USER_ID) Integer userId) {
-       movieService.addPhoneNumbers(numbers,userId);
-        return HttpResponse.ok();
-    }
+//    @Post(value = "/phone-numbers", produces = APPLICATION_JSON)
+//    @ExecuteOn(TaskExecutors.IO)
+//    public HttpResponse<?> addPhoneNumbers(@Body ArrayList<String> numbers,
+//                                           @Header(USER_ID) Integer userId) {
+//       movieService.addPhoneNumbers(numbers,userId);
+//        return HttpResponse.ok();
+//    }
 
 }
