@@ -14,6 +14,8 @@ import com.lulugyda.models.responses.MovieListResponse;
 import com.lulugyda.repositories.PhoneNumbersCrudRepositoryFacade;
 import com.lulugyda.repositories.UsersCrudRepositoryFacade;
 import com.lulugyda.repositories.*;
+import com.lulugyda.security.BCryptPasswordEncoderService;
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,9 @@ public class MovieServiceFacade implements MovieService {
     private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
     private final PhoneNumbersCrudRepositoryFacade phoneNumbersCrudRepositoryFacade;
     private final MoviesCrudRepositoryFacade moviesCrudRepositoryFacade;
+
+
+    private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
 
     @Override
     public MovieListResponse getMovieList(String page) {
@@ -65,6 +70,8 @@ public class MovieServiceFacade implements MovieService {
 
     @Override
     public void registerUser(UserEntity userEntity) {
+       String encodedPassword = bCryptPasswordEncoderService.encode(userEntity.getPassword());
+       userEntity.setPassword(encodedPassword);
         usersCrudRepositoryFacade.saveUser(userEntity);
 
     }
