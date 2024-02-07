@@ -74,13 +74,7 @@ public class UsersCrudRepositoryFacade {
             UserEntity user = userOptional.get();
             List<MovieEntity> userMovies = user.getMovieEntity();
 
-            Iterator<MovieEntity> iterator = userMovies.iterator();
-            while (iterator.hasNext()) {
-                MovieEntity movie = iterator.next();
-                if (movie.getMovieId().equals(movieId)) {
-                    iterator.remove();
-                }
-            }
+            userMovies.removeIf(movie -> movie.getMovieId().equals(movieId));
 
         } catch (Exception exception) {
             log.error("deleteUserMovie:: Exception when trying to delete a movie for user id {}",
