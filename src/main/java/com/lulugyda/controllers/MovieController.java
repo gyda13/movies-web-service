@@ -85,6 +85,17 @@ public class MovieController {
         return HttpResponse.ok(movies);
     }
 
+    @Delete(value = "/favourites/{movieId}", produces = APPLICATION_JSON)
+    @ExecuteOn(TaskExecutors.IO)
+    public HttpResponse<?> deleteUserMovie(
+            @Header(USER_ID) Integer userId,
+            @Header(HEADER_X_CORRELATION_ID) String correlationId,
+            @PathVariable(value = "movieId")
+            @Pattern(regexp = "[0-9]+", message = "MovieId should be number") Integer movieId) {
+        movieService.deleteUserMovie(userId, movieId);
+        return HttpResponse.ok();
+    }
+
 
 
 }
