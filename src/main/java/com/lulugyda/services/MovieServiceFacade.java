@@ -99,4 +99,10 @@ public class MovieServiceFacade implements MovieService {
         return movieEntityDtos;
 
     }
+
+    @Override
+    public void deleteUserMovie(Integer userId, Integer movieId) {
+        usersCrudRepositoryFacade.deleteUserMovie(movieId, userId);
+    }
+
 }

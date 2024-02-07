@@ -22,5 +22,7 @@ public interface MovieService {
 
     List<MovieEntityDto> findUserMovies(Integer userId);
 
+    void deleteUserMovie(Integer userId, Integer movieId);
+
 
 }
