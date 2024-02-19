@@ -15,7 +15,6 @@ import com.lulugyda.repositories.PhoneNumbersCrudRepositoryFacade;
 import com.lulugyda.repositories.UsersCrudRepositoryFacade;
 import com.lulugyda.repositories.*;
 import com.lulugyda.security.BCryptPasswordEncoderService;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
