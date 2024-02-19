@@ -13,4 +13,8 @@ public interface UsersCrudRepository extends CrudRepository<UserEntity, Integer>
     @EntityGraph(attributePaths = {"movieEntity"})
     Optional<UserEntity> findById(Integer userId);
 
+    Optional<UserEntity> findByUsername(String username);
+
+
+
 }

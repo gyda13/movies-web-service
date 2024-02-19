@@ -4,17 +4,18 @@ import com.lulugyda.exceptions.MovieException;
 import com.lulugyda.exceptions.models.ErrorCode;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
+import com.lulugyda.security.BCryptPasswordEncoderService;
 import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
 import static com.lulugyda.utils.Constants.USER_NOT_FOUND;
+
 
 @Slf4j
 @Singleton
@@ -22,6 +23,8 @@ import static com.lulugyda.utils.Constants.USER_NOT_FOUND;
 public class UsersCrudRepositoryFacade {
 
     private final UsersCrudRepository usersCrudRepository;
+
+    private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
 
     public UserEntity saveUser(UserEntity userEntity) {
         try {
@@ -82,6 +85,16 @@ public class UsersCrudRepositoryFacade {
             handleDatabaseException(exception);
         }
 
+    }
+
+    public boolean validCredentials(String username, String password) {
+
+        Optional<UserEntity> user = usersCrudRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            return false;
+        }
+
+        return bCryptPasswordEncoderService.matches(password, user.get().getPassword());
     }
 
 }
