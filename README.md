@@ -24,7 +24,7 @@ Send users weekly email with popular movies</br>
 
 <h1>Topics:</h1>
 unit/integration testing </br>
-DB with flyway</br>
+DB with flyway ✅ </br>
 Validation ✅ </br>
 Exception Handler (db exception, TMDB client exception ✅, validation exception ✅)</br>
 logging ✅ </br>
