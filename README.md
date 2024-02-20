@@ -28,7 +28,7 @@ DB with flyway ✅ </br>
 Validation ✅ </br>
 Exception Handler (db exception, TMDB client exception ✅, validation exception ✅)</br>
 logging ✅ </br>
-Auth - JWT</br>
+Auth - JWT ✅ </br>
 Redis (list of movies)(with cronjob to update every end of date)</br>
 Email - SMTP</br>
 Fiels - FTP</br>
