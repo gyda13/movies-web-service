@@ -26,7 +26,6 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
             String pw = (String) authenticationRequest.getSecret();
 
             boolean validCredentials = usersCrudRepositoryFacade.validCredentials(username, pw);
-            // add logic later
             if (validCredentials) {
                 emitter.onNext(AuthenticationResponse.success(username));
                 emitter.onComplete();
