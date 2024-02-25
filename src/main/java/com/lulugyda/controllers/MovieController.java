@@ -9,6 +9,7 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +21,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 
 import static com.lulugyda.utils.Constants.HEADER_X_CORRELATION_ID;
-import static com.lulugyda.utils.Constants.USER_ID;
+import static com.lulugyda.utils.Helper.getUserId;
 import static io.micronaut.http.MediaType.APPLICATION_JSON;
 import com.lulugyda.models.responses.MovieDetailsResponse;
 import io.micronaut.http.HttpStatus;
@@ -72,33 +73,40 @@ public class MovieController {
     @Post(value = "/favourites", produces = APPLICATION_JSON)
     @ExecuteOn(TaskExecutors.IO)
     public HttpResponse<List<MovieEntity>> saveUserMovies(
-            @Header(USER_ID) Integer userId,
             @Header(HEADER_X_CORRELATION_ID) String correlationId,
-            @Body List<MovieEntity> movieEntity) {
+            @Body List<MovieEntity> movieEntity,
+            Authentication authentication) {
+
+        Integer userId =  getUserId(authentication);
         List<MovieEntity> movies = movieService.saveUserMovies(userId, movieEntity);
+
         return HttpResponse.ok(movies);
     }
 
     @Get(value = "/favourites", produces = APPLICATION_JSON)
     @ExecuteOn(TaskExecutors.IO)
     public HttpResponse<List<MovieEntityDto>> findUserMovies(
-            @Header(USER_ID) Integer userId,
-            @Header(HEADER_X_CORRELATION_ID) String correlationId) {
+            @Header(HEADER_X_CORRELATION_ID) String correlationId,
+            Authentication authentication) {
+
+        Integer userId =  getUserId(authentication);
         List<MovieEntityDto> movies = movieService.findUserMovies(userId);
+
         return HttpResponse.ok(movies);
     }
 
     @Delete(value = "/favourites/{movieId}", produces = APPLICATION_JSON)
     @ExecuteOn(TaskExecutors.IO)
     public HttpResponse<?> deleteUserMovie(
-            @Header(USER_ID) Integer userId,
             @Header(HEADER_X_CORRELATION_ID) String correlationId,
             @PathVariable(value = "movieId")
-            @Pattern(regexp = "[0-9]+", message = "MovieId should be number") Integer movieId) {
+            @Pattern(regexp = "[0-9]+", message = "MovieId should be number") Integer movieId,
+            Authentication authentication) {
+
+        Integer userId =  getUserId(authentication);
         movieService.deleteUserMovie(userId, movieId);
+
         return HttpResponse.ok();
     }
-
-
 
 }

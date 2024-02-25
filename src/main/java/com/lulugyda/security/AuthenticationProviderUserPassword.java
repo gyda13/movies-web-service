@@ -1,5 +1,6 @@
 package com.lulugyda.security;
 
+import com.lulugyda.models.entities.UserEntity;
 import com.lulugyda.repositories.UsersCrudRepositoryFacade;
 import io.micronaut.security.authentication.AuthenticationException;
 import io.micronaut.security.authentication.AuthenticationFailed;
@@ -12,11 +13,15 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import org.reactivestreams.Publisher;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Singleton
 @RequiredArgsConstructor
 public class AuthenticationProviderUserPassword implements AuthenticationProvider {
 
     private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
+    private final Map<String,Object> attributes = new HashMap<>();
 
     @Override
     public Publisher<AuthenticationResponse> authenticate(Object httpRequest, AuthenticationRequest authenticationRequest) {
@@ -26,8 +31,11 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
             String pw = (String) authenticationRequest.getSecret();
 
             boolean validCredentials = usersCrudRepositoryFacade.validCredentials(username, pw);
+            UserEntity user = usersCrudRepositoryFacade.getUserIdByUsername(username);
+            attributes.put("user-id",user.getId());
+
             if (validCredentials) {
-                emitter.onNext(AuthenticationResponse.success(username));
+                emitter.onNext(AuthenticationResponse.success(username,attributes));
                 emitter.onComplete();
             } else {
                 emitter.onError(new AuthenticationException(new AuthenticationFailed()));
