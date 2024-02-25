@@ -26,7 +26,7 @@ Send users weekly email with popular movies</br>
 unit/integration testing </br>
 DB with flyway ✅ </br>
 Validation ✅ </br>
-Exception Handler (db exception, TMDB client exception ✅, validation exception ✅)</br>
+Exception Handler (db exception✅, TMDB client exception ✅, validation exception ✅)</br>
 logging ✅ </br>
 Auth - JWT ✅ </br>
 Redis (list of movies)(with cronjob to update every end of date)</br>
