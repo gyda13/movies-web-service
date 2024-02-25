@@ -97,4 +97,10 @@ public class UsersCrudRepositoryFacade {
         return bCryptPasswordEncoderService.matches(password, user.get().getPassword());
     }
 
+    public UserEntity getUserIdByUsername(String username) {
+
+        Optional<UserEntity> user = usersCrudRepository.findByUsername(username);
+        return user.orElse(null);
+
+    }
 }
