@@ -20,6 +20,20 @@ micronaut:
                     secret:
                         generator:
                             secret: ${JWT_GENERATOR_SIGNATURE_SECRET:Epvncq4kEXXDVZg4lxD1D58cN09FxlMc}
+
+    mail:
+        enabled: true
+        default-configuration: default
+        configurations:
+            default:
+                transport:
+                    protocol: smtp
+                    host: localhost
+                    port: 1025
+                auth:
+                    username: ""
+                    password: ""
+
 tmdb-client:
     api:
         url: https://api.themoviedb.org/3
