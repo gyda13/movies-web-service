@@ -42,6 +42,10 @@ dependencies {
     runtimeOnly("org.flywaydb:flyway-database-postgresql")
     runtimeOnly("io.micronaut.sql:micronaut-jdbc-tomcat")
     testImplementation 'org.mockito:mockito-inline:3.12.4'
+    //mail
+    implementation 'javax.mail:javax.mail-api:1.6.2'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+    implementation 'com.sun.mail:smtp:1.6.2'
 
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
