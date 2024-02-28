@@ -12,7 +12,7 @@ import java.util.List;
 public interface MovieService {
     MovieListResponse getMovieList(String page);
 
-    MovieDetailsResponse getMovieDetails(String movieId);
+    String getMovieDetails(String movieId);
 
     List<MovieEntity> saveUserMovies(Integer userId, List<MovieEntity> movieEntity);
 

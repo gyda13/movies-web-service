@@ -34,6 +34,9 @@ micronaut:
                     username: ""
                     password: ""
 
+redis:
+    uri: redis://localhost
+
 tmdb-client:
     api:
         url: https://api.themoviedb.org/3

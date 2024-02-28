@@ -61,12 +61,12 @@ public class MovieController {
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "500", description = "Internal Server Error")
     @ExecuteOn(TaskExecutors.IO)
-    public HttpResponse<MovieDetailsResponse> getMovieDetails(
+    public HttpResponse<String> getMovieDetails(
             @PathVariable(value = "movieId")
             @Pattern(regexp = "[0-9]+", message = "MovieId should be number") String movieId,
             @Header(HEADER_X_CORRELATION_ID) String correlationId) {
 
-        MovieDetailsResponse response = movieService.getMovieDetails(movieId);
+        String response = movieService.getMovieDetails(movieId);
         return HttpResponse.status(HttpStatus.valueOf(HttpStatus.OK.getCode())).body(response);
     }
 
