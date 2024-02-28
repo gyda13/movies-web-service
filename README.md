@@ -23,16 +23,15 @@ Send users weekly email with popular movies</br>
 
 
 <h1>Topics:</h1>
-unit/integration testing </br>
-DB with flyway ✅ </br>
-Validation ✅ </br>
 Exception Handler (db exception ✅, TMDB client exception ✅, validation exception ✅)</br>
-logging ✅ </br>
-Auth - JWT ✅ </br>
-Redis (list of movies)</br>
 Email - SMTP (cronjob to send weekly emails - list of movies) ✅ </br>
-Fiels - FTP</br>
-
+Redis (movie details) ✅ </br>
+DB with flyway ✅ </br>
+Auth - JWT ✅ </br>
+Validation ✅ </br>
+logging ✅ </br>
+unit/integration testing </br>
+Files - FTP</br>
 
 <h1>End Points:</h1>
 GET v1/movies </br>
