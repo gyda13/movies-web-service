@@ -1,0 +1,17 @@
+version: '2.2'
+services:
+    moviedb:
+        image: postgres:14.1-alpine
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_ROOT_USER: lulugyda
+            POSTGRES_ROOT_PASSWORD: passwod
+            POSTGRES_DATABASE: moviedb
+            POSTGRES_USER: lulugyda
+            POSTGRES_PASSWORD: password
+
+    redis:
+        image: redis:latest
+        ports:
+            - "6379:6379"

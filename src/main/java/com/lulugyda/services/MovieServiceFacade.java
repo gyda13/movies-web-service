@@ -1,5 +1,6 @@
 package com.lulugyda.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lulugyda.clients.TmdbClientFacade;
 import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
@@ -32,9 +33,8 @@ public class MovieServiceFacade implements MovieService {
     private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
     private final PhoneNumbersCrudRepositoryFacade phoneNumbersCrudRepositoryFacade;
     private final MoviesCrudRepositoryFacade moviesCrudRepositoryFacade;
-
-
     private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
+    private final RedisCacheService redisCacheService;
 
     @Override
     public MovieListResponse getMovieList(String page) {
@@ -42,24 +42,34 @@ public class MovieServiceFacade implements MovieService {
     }
 
     @Override
-    public MovieDetailsResponse getMovieDetails(String movieId) {
+    public String getMovieDetails(String movieId) {
 
-        TmdbMovieDetailsResponse movieDetails = tmdbClientFacade.getMovieDetails(movieId);
+        String cachedData = redisCacheService.getValue(movieId);
 
-        TmdbMovieListResponse similarMoviesResponse =  tmdbClientFacade.getSimilarMovies(movieId);
+        if (cachedData == null) {
 
-        TmdbMovieReviewersResponse movieReviewers = tmdbClientFacade.getMovieReviewers(movieId);
+            TmdbMovieDetailsResponse movieDetails = tmdbClientFacade.getMovieDetails(movieId);
+            TmdbMovieListResponse similarMoviesResponse = tmdbClientFacade.getSimilarMovies(movieId);
+            TmdbMovieReviewersResponse movieReviewers = tmdbClientFacade.getMovieReviewers(movieId);
 
+            MovieDetailsResponse movieDetailsResponse =
+                    TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(movieDetails);
+            movieDetailsResponse.setReviewers(
+                    TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers));
+            movieDetailsResponse.setSimilarMovies(
+                    TmdbMovieDetailsMapper.INSTANCE.mapToMovieListResponse(similarMoviesResponse).getResults());
+            ObjectMapper objectMapper = new ObjectMapper();
 
-        MovieDetailsResponse movieDetailsResponse =
-                TmdbMovieDetailsMapper.INSTANCE.mapToMovieDetailsResponse(movieDetails);
+            try {
+                cachedData = objectMapper.writeValueAsString(movieDetailsResponse);
+            } catch (Exception e) {
+                throw new RuntimeException("json processing exception");
+            }
 
-        movieDetailsResponse.setReviewers(
-                TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers));
-        movieDetailsResponse.setSimilarMovies(
-                TmdbMovieDetailsMapper.INSTANCE.mapToMovieListResponse(similarMoviesResponse).getResults());
+            redisCacheService.putValue(movieId,cachedData);
+        }
 
-        return movieDetailsResponse;
+        return cachedData;
     }
 
     @Override
