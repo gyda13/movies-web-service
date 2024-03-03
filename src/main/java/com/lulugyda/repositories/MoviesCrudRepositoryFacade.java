@@ -6,7 +6,6 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +52,7 @@ public class MoviesCrudRepositoryFacade {
     public List<MovieEntity> findUserMovies(Integer userId) {
         try {
             log.info("findUserMovies for user id {}", userId);
+            usersCrudRepositoryFacade.findUser(userId);
             return moviesCrudRepository.findByUsersId(userId);
         } catch (Exception exception) {
             log.error("findUserMovies:: Exception when retrieving users movies for user id {}", userId);

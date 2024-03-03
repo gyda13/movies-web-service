@@ -1,7 +1,6 @@
 package com.lulugyda.repositories;
 
-import com.lulugyda.exceptions.MovieException;
-import com.lulugyda.exceptions.models.ErrorCode;
+import com.lulugyda.exceptions.UserNotFoundException;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
 import com.lulugyda.security.BCryptPasswordEncoderService;
@@ -14,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
-import static com.lulugyda.utils.Constants.USER_NOT_FOUND;
 
 
 @Slf4j
@@ -43,8 +41,8 @@ public class UsersCrudRepositoryFacade {
         try {
             log.info("findUser for user id {}", userId);
             userEntity = usersCrudRepository.findById(userId);
-            if(userEntity.isEmpty()){
-                throw new MovieException(ErrorCode.INTERNAL_SERVER_ERROR.getId(), USER_NOT_FOUND);
+            if(userEntity.isEmpty()) {
+                throw new UserNotFoundException();
             }
         } catch (Exception exception) {
             log.error("findUser:: Exception when finding user for id {}",
@@ -57,7 +55,10 @@ public class UsersCrudRepositoryFacade {
     public void updateUser(UserEntity user) {
         try {
             log.info("updateUser for user id {}", user.getId());
-            usersCrudRepository.update(user);
+            UserEntity userEntity = usersCrudRepository.update(user);
+            if(userEntity == null) {
+                throw new UserNotFoundException();
+            }
 
         } catch (Exception exception) {
             log.error("updateUser:: Exception when updating user for id {}",
@@ -71,8 +72,8 @@ public class UsersCrudRepositoryFacade {
         Optional<UserEntity> userOptional = usersCrudRepository.findById(userId);
         try {
             log.info("deleteUserMovie for user id {}", userId);
-            if(userOptional.isEmpty()){
-                throw new MovieException(ErrorCode.INTERNAL_SERVER_ERROR.getId(), USER_NOT_FOUND);
+            if(userOptional.isEmpty()) {
+                throw new UserNotFoundException();
             }
             UserEntity user = userOptional.get();
             List<MovieEntity> userMovies = user.getMovieEntity();
