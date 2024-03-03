@@ -1,7 +1,6 @@
 package com.lulugyda.repositories;
 
-import com.lulugyda.exceptions.MovieException;
-import com.lulugyda.exceptions.models.ErrorCode;
+import com.lulugyda.exceptions.UserNotFoundException;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
 import com.lulugyda.security.BCryptPasswordEncoderService;
@@ -13,8 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Optional;
 
-import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
-import static com.lulugyda.utils.Constants.USER_NOT_FOUND;
+import static com.lulugyda.exceptions.ExceptionManager.handleException;
 
 
 @Slf4j
@@ -32,7 +30,7 @@ public class UsersCrudRepositoryFacade {
             return  usersCrudRepository.save(userEntity);
         } catch (Exception exception) {
             log.error("saveUser:: Exception when saving a new user");
-           handleDatabaseException(exception);
+           handleException(exception);
            return null;
         }
     }
@@ -43,13 +41,13 @@ public class UsersCrudRepositoryFacade {
         try {
             log.info("findUser for user id {}", userId);
             userEntity = usersCrudRepository.findById(userId);
-            if(userEntity.isEmpty()){
-                throw new MovieException(ErrorCode.INTERNAL_SERVER_ERROR.getId(), USER_NOT_FOUND);
+            if(userEntity.isEmpty()) {
+                throw new UserNotFoundException();
             }
         } catch (Exception exception) {
             log.error("findUser:: Exception when finding user for id {}",
                     userId);
-            handleDatabaseException(exception);
+            handleException(exception);
         }
         return userEntity;
     }
@@ -57,12 +55,15 @@ public class UsersCrudRepositoryFacade {
     public void updateUser(UserEntity user) {
         try {
             log.info("updateUser for user id {}", user.getId());
-            usersCrudRepository.update(user);
+            UserEntity userEntity = usersCrudRepository.update(user);
+            if(userEntity == null) {
+                throw new UserNotFoundException();
+            }
 
         } catch (Exception exception) {
             log.error("updateUser:: Exception when updating user for id {}",
                     user.getId());
-            handleDatabaseException(exception);
+            handleException(exception);
         }
     }
 
@@ -71,8 +72,8 @@ public class UsersCrudRepositoryFacade {
         Optional<UserEntity> userOptional = usersCrudRepository.findById(userId);
         try {
             log.info("deleteUserMovie for user id {}", userId);
-            if(userOptional.isEmpty()){
-                throw new MovieException(ErrorCode.INTERNAL_SERVER_ERROR.getId(), USER_NOT_FOUND);
+            if(userOptional.isEmpty()) {
+                throw new UserNotFoundException();
             }
             UserEntity user = userOptional.get();
             List<MovieEntity> userMovies = user.getMovieEntity();
@@ -82,7 +83,7 @@ public class UsersCrudRepositoryFacade {
         } catch (Exception exception) {
             log.error("deleteUserMovie:: Exception when trying to delete a movie for user id {}",
                     userId);
-            handleDatabaseException(exception);
+            handleException(exception);
         }
 
     }

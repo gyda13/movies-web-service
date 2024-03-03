@@ -6,13 +6,12 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
+import static com.lulugyda.exceptions.ExceptionManager.handleException;
 
 @Slf4j
 @Singleton
@@ -45,7 +44,7 @@ public class MoviesCrudRepositoryFacade {
 
         } catch (Exception exception) {
             log.error("saveUserMovies:: Exception when saving movies for user id {}", userId);
-            handleDatabaseException(exception);
+            handleException(exception);
         }
         return null;
     }
@@ -53,10 +52,11 @@ public class MoviesCrudRepositoryFacade {
     public List<MovieEntity> findUserMovies(Integer userId) {
         try {
             log.info("findUserMovies for user id {}", userId);
+            usersCrudRepositoryFacade.findUser(userId);
             return moviesCrudRepository.findByUsersId(userId);
         } catch (Exception exception) {
             log.error("findUserMovies:: Exception when retrieving users movies for user id {}", userId);
-            handleDatabaseException(exception);
+            handleException(exception);
 
         }
         return null;
