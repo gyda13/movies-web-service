@@ -5,7 +5,7 @@ import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
+import static com.lulugyda.exceptions.ExceptionManager.handleException;
 
 @Slf4j
 @Singleton
@@ -21,7 +21,7 @@ public class PhoneNumbersCrudRepositoryFacade {
         } catch (Exception exception) {
             log.error("savePhoneNumber:: Exception when saving user for id {}",
                     phoneNumberEntity.getId());
-            handleDatabaseException(exception);
+            handleException(exception);
         }
     }
 }

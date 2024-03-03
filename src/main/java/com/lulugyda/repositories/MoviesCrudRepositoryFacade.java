@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
+import static com.lulugyda.exceptions.ExceptionManager.handleException;
 
 @Slf4j
 @Singleton
@@ -44,7 +44,7 @@ public class MoviesCrudRepositoryFacade {
 
         } catch (Exception exception) {
             log.error("saveUserMovies:: Exception when saving movies for user id {}", userId);
-            handleDatabaseException(exception);
+            handleException(exception);
         }
         return null;
     }
@@ -56,7 +56,7 @@ public class MoviesCrudRepositoryFacade {
             return moviesCrudRepository.findByUsersId(userId);
         } catch (Exception exception) {
             log.error("findUserMovies:: Exception when retrieving users movies for user id {}", userId);
-            handleDatabaseException(exception);
+            handleException(exception);
 
         }
         return null;

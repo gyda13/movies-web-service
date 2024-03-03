@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Optional;
 
-import static com.lulugyda.exceptions.DatabaseExceptionHandler.handleDatabaseException;
+import static com.lulugyda.exceptions.ExceptionManager.handleException;
 
 
 @Slf4j
@@ -30,7 +30,7 @@ public class UsersCrudRepositoryFacade {
             return  usersCrudRepository.save(userEntity);
         } catch (Exception exception) {
             log.error("saveUser:: Exception when saving a new user");
-           handleDatabaseException(exception);
+           handleException(exception);
            return null;
         }
     }
@@ -47,7 +47,7 @@ public class UsersCrudRepositoryFacade {
         } catch (Exception exception) {
             log.error("findUser:: Exception when finding user for id {}",
                     userId);
-            handleDatabaseException(exception);
+            handleException(exception);
         }
         return userEntity;
     }
@@ -63,7 +63,7 @@ public class UsersCrudRepositoryFacade {
         } catch (Exception exception) {
             log.error("updateUser:: Exception when updating user for id {}",
                     user.getId());
-            handleDatabaseException(exception);
+            handleException(exception);
         }
     }
 
@@ -83,7 +83,7 @@ public class UsersCrudRepositoryFacade {
         } catch (Exception exception) {
             log.error("deleteUserMovie:: Exception when trying to delete a movie for user id {}",
                     userId);
-            handleDatabaseException(exception);
+            handleException(exception);
         }
 
     }
