@@ -26,6 +26,7 @@ import static io.micronaut.http.MediaType.APPLICATION_JSON;
 import com.lulugyda.models.responses.MovieDetailsResponse;
 import io.micronaut.http.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -105,6 +106,17 @@ public class MovieController {
 
         Integer userId =  getUserId(authentication);
         movieService.deleteUserMovie(userId, movieId);
+
+        return HttpResponse.ok();
+    }
+
+    @Post(value = "/phone-numbers", produces = APPLICATION_JSON)
+    @ExecuteOn(TaskExecutors.IO)
+    public HttpResponse<?> addPhoneNumbers(@Body ArrayList<String> numbers,
+                                           Authentication authentication) {
+
+        Integer userId =  getUserId(authentication);
+        movieService.addPhoneNumbers(numbers,userId);
 
         return HttpResponse.ok();
     }

@@ -1,10 +1,14 @@
 package com.lulugyda.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 public class Constants {
+
+    public static final ObjectMapper objectMapper = new ObjectMapper();
+
+
     public static final String HEADER_X_CORRELATION_ID = "x-correlation-id";
-
-    public static final String USER_ID = "user-id";
-
 
     public static final String DATABASE_OPERATION_COULD_NOT_BE_PERFORMED = "Database operation could not be performed";
 
