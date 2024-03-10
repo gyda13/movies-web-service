@@ -16,7 +16,6 @@ services:
         ports:
             - "6379:6379"
 
-
     vsftpdtest:
         image: fauria/vsftpd
         platform: linux/amd64
@@ -32,3 +31,9 @@ services:
             PASV_MIN_PORT: 21100
             PASV_MAX_PORT: 21110
         restart: unless-stopped
+
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - "1025:1025"
+            - "8025:8025"
