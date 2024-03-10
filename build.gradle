@@ -67,6 +67,9 @@ dependencies {
     implementation 'org.springframework:spring-jcl:5.3.25'
     implementation "org.springframework.security:spring-security-crypto:5.7.5"
 
+    runtimeOnly("io.netty:netty-resolver-dns-native-macos:XXX:osx-x86_64")
+    implementation 'commons-net:commons-net:3.9.0'
+
 }
 
 application {
