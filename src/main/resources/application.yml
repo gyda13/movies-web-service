@@ -65,3 +65,11 @@ flyway:
         default:
             enabled: true
             baseline-on-migrate: true
+
+
+ftp:
+    host: localhost
+    port: 21
+    username: myuser
+    password: mypass
+

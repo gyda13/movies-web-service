@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.8'
 services:
     moviedb:
         image: postgres:14.1-alpine
@@ -15,6 +15,22 @@ services:
         image: redis:latest
         ports:
             - "6379:6379"
+
+    vsftpdtest:
+        image: fauria/vsftpd
+        platform: linux/amd64
+        ports:
+            - "20-21:20-21"
+            - "21100-21110:21100-21110"
+        volumes:
+            - /Users/gydaalmohaimeed/Documents/ftp_data:/home/vsftpd
+        environment:
+            FTP_USER: myuser
+            FTP_PASS: mypass
+            PASV_ADDRESS: 127.0.0.1
+            PASV_MIN_PORT: 21100
+            PASV_MAX_PORT: 21110
+        restart: unless-stopped
 
     mailhog:
         image: mailhog/mailhog
