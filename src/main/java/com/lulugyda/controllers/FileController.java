@@ -1,6 +1,7 @@
 package com.lulugyda.controllers;
 
 import com.lulugyda.services.FtpService;
+import com.lulugyda.models.enums.AllowedContentType;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -19,7 +20,7 @@ import static com.lulugyda.utils.Constants.HEADER_X_CORRELATION_ID;
 import static com.lulugyda.utils.Helper.getUserId;
 
 
-@Controller("v1")
+@Controller("v1/file")
 @Validated
 @RequiredArgsConstructor
 @Secured(SecurityRule.IS_AUTHENTICATED)
@@ -29,7 +30,7 @@ public class FileController {
     private final FtpService ftpService;
 
     @Post(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA)
-    public HttpResponse<String> uploadFile(@Part("file") CompletedFileUpload file,
+    public HttpResponse<String> uploadProfilePic(@Part("file") CompletedFileUpload file,
                                            @Part("uploadPath") String uploadPath,
                                            @Header(HEADER_X_CORRELATION_ID) String correlationId,
                                            Authentication authentication) {
@@ -40,8 +41,16 @@ public class FileController {
         if (file.getSize() == 0) {
             return HttpResponse.badRequest("No file uploaded.");
         }
+
+        MediaType mediaType = file.getContentType().get();
+        if (!AllowedContentType.isAllowed(String.valueOf(mediaType))) {
+            return HttpResponse.badRequest("File type not supported. Only png files are allowed.");
+        }
+
+
         try {
 
+            // upload path is the target directory in the FTP ex: ftp> mkdir uploads -> uploadPath = /uploads/
             ftpService.uploadFile(file.getInputStream(), file.getFilename(), uploadPath, userId);
 
             return HttpResponse.ok("File uploaded successfully.");
@@ -50,12 +59,14 @@ public class FileController {
         }
     }
 
-    @Get("/{filename}")
-    public HttpResponse<StreamedFile> viewProfilePic(String filename,
-                                                     @Header(HEADER_X_CORRELATION_ID) String correlationId) {
+    @Get("/retrieve")
+    public HttpResponse<StreamedFile> viewProfilePic(@Header(HEADER_X_CORRELATION_ID) String correlationId,
+                                                     Authentication authentication) {
         try {
 
-            String filePath = "uploads/" + filename;
+            Integer userId =  getUserId(authentication);
+
+            String filePath = "uploads/" + userId + ".png";
             InputStream fileStream = ftpService.downloadFile(filePath);
 
             if (fileStream == null) {
