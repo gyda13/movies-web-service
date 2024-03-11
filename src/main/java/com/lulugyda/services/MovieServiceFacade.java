@@ -1,6 +1,5 @@
 package com.lulugyda.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lulugyda.clients.TmdbClientFacade;
 import com.lulugyda.clients.models.responses.TmdbMovieDetailsResponse;
 import com.lulugyda.clients.models.responses.TmdbMovieListResponse;
@@ -16,6 +15,7 @@ import com.lulugyda.repositories.PhoneNumbersCrudRepositoryFacade;
 import com.lulugyda.repositories.UsersCrudRepositoryFacade;
 import com.lulugyda.repositories.*;
 import com.lulugyda.security.BCryptPasswordEncoderService;
+import com.lulugyda.utils.Constants;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,10 +58,9 @@ public class MovieServiceFacade implements MovieService {
                     TmdbMovieDetailsMapper.INSTANCE.maoToMovieReviewersResponse(movieReviewers));
             movieDetailsResponse.setSimilarMovies(
                     TmdbMovieDetailsMapper.INSTANCE.mapToMovieListResponse(similarMoviesResponse).getResults());
-            ObjectMapper objectMapper = new ObjectMapper();
 
             try {
-                cachedData = objectMapper.writeValueAsString(movieDetailsResponse);
+                cachedData = Constants.objectMapper.writeValueAsString(movieDetailsResponse);
             } catch (Exception e) {
                 throw new RuntimeException("json processing exception");
             }
