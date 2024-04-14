@@ -34,6 +34,10 @@ public class ExceptionManager {
         if (exception instanceof ConstraintViolationException) {
             throw new ConstraintViolationException(((ConstraintViolationException) exception).getConstraintViolations());
         }
+        if (exception instanceof WrongPasswordException) {
+            throw new MovieException(ErrorCode.WRONG_PASSWORD.getId(),
+                    ErrorCode.WRONG_PASSWORD.getMessage());
+        }
 
         throw new MovieException(ErrorCode.INTERNAL_SERVER_ERROR.getId(),
                Constants.AN_EXCEPTION_OCCURRED_TRYING_TO_COMMUNICATE_WITH_THE_DATABASE);

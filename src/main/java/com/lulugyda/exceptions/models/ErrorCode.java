@@ -31,7 +31,9 @@ public enum ErrorCode {
     DB_CONSTRAINT_VIOLATED("0053", "CUSTOMER.DB_CONSTRAINT_VIOLATED"),
 
     // User
-    USER_NOT_FOUND("0014", "User Not Found");
+    USER_NOT_FOUND("0014", "User Not Found"),
+
+    WRONG_PASSWORD("0015", "Wrong Password");
 
 
     @Getter
