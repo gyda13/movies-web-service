@@ -91,16 +91,29 @@ public class UsersCrudRepositoryFacade {
     public boolean validCredentials(String username, String password) {
 
         Optional<UserEntity> user = usersCrudRepository.findByUsername(username);
-        if (user.isEmpty()) {
-            return false;
-        }
+        try {
+            if (user.isEmpty()) {
+                throw new UserNotFoundException();
+            }
+        } catch (Exception exception) {
+            handleException(exception);
 
+        }
         return bCryptPasswordEncoderService.matches(password, user.get().getPassword());
     }
 
     public UserEntity getUserIdByUsername(String username) {
 
         Optional<UserEntity> user = usersCrudRepository.findByUsername(username);
+        try {
+            if (user.isEmpty()) {
+                throw new UserNotFoundException();
+            }
+
+        } catch (Exception exception) {
+            handleException(exception);
+
+        }
         return user.orElse(null);
 
     }
