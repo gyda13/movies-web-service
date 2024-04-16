@@ -33,7 +33,7 @@ public enum ErrorCode {
     // User
     USER_NOT_FOUND("0014", "User Not Found"),
 
-    WRONG_PASSWORD("0015", "Wrong Password");
+    INVALID_USERNAME_OR_PASSWORD("0015", "Invalid Username Or Password");
 
 
     @Getter
