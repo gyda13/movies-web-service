@@ -1,5 +1,6 @@
 package com.lulugyda.repositories;
 
+import com.lulugyda.exceptions.InvalidUsernameOrPasswordException;
 import com.lulugyda.exceptions.UserNotFoundException;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
@@ -93,7 +94,7 @@ public class UsersCrudRepositoryFacade {
         Optional<UserEntity> user = usersCrudRepository.findByUsername(username);
         try {
             if (user.isEmpty()) {
-                throw new UserNotFoundException();
+                throw new InvalidUsernameOrPasswordException();
             }
         } catch (Exception exception) {
             handleException(exception);
