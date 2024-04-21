@@ -29,7 +29,7 @@ unit/integration testing ✅ </br>
 Redis (movie details) ✅ </br>
 DB with flyway ✅ </br>
 Auth - JWT ✅ </br>
-2FA - OTP </br>
+2FA - OTP ✅ </br>
 Validation ✅ </br>
 logging ✅ </br>
 Files - FTP ✅ </br>
