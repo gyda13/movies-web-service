@@ -1,6 +1,6 @@
 package com.lulugyda.security;
 
-import com.lulugyda.exceptions.WrongPasswordException;
+import com.lulugyda.exceptions.InvalidUsernameOrPasswordException;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -26,7 +26,7 @@ public class BCryptPasswordEncoderService implements PasswordEncoder {
                            @NotBlank @NotNull String encodedPassword) {
         try {
             if (!delegate.matches(rawPassword, encodedPassword)){
-                throw new WrongPasswordException();
+                throw new InvalidUsernameOrPasswordException();
             }
 
         } catch (Exception exception) {

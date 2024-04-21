@@ -14,7 +14,6 @@ import com.lulugyda.models.responses.MovieListResponse;
 import com.lulugyda.repositories.PhoneNumbersCrudRepositoryFacade;
 import com.lulugyda.repositories.UsersCrudRepositoryFacade;
 import com.lulugyda.repositories.*;
-import com.lulugyda.security.BCryptPasswordEncoderService;
 import com.lulugyda.utils.Constants;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Singleton
@@ -33,7 +31,6 @@ public class MovieServiceFacade implements MovieService {
     private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
     private final PhoneNumbersCrudRepositoryFacade phoneNumbersCrudRepositoryFacade;
     private final MoviesCrudRepositoryFacade moviesCrudRepositoryFacade;
-    private final BCryptPasswordEncoderService bCryptPasswordEncoderService;
     private final RedisCacheService redisCacheService;
 
     @Override
@@ -65,7 +62,7 @@ public class MovieServiceFacade implements MovieService {
                 throw new RuntimeException("json processing exception");
             }
 
-            redisCacheService.putValue(movieId,cachedData);
+            redisCacheService.putValue(movieId,cachedData, 1440L);
         }
 
         return cachedData;
@@ -77,23 +74,14 @@ public class MovieServiceFacade implements MovieService {
     }
 
     @Override
-    public void registerUser(UserEntity userEntity) {
-       String encodedPassword = bCryptPasswordEncoderService.encode(userEntity.getPassword());
-       userEntity.setPassword(encodedPassword);
-        usersCrudRepositoryFacade.saveUser(userEntity);
+    public void addPhoneNumbers(ArrayList<String> numbers, UserEntity user) {
 
-    }
-
-    @Override
-    public void addPhoneNumbers(ArrayList<String> numbers, Integer userId) {
-        Optional<UserEntity> user = usersCrudRepositoryFacade.findUser(userId);
-
-        if (user.isPresent()) {
+        if (!user.equals(null)) {
             for (String number : numbers) {
                 phoneNumbersCrudRepositoryFacade.savePhoneNumber(
                         PhoneNumberEntity.builder()
                                 .mobileNumber(number)
-                                .user(user.get())
+                                .user(user)
                                 .build());
             }
         }

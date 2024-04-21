@@ -14,8 +14,8 @@ public class RedisCacheService {
     @Inject
     private final StatefulRedisConnection<String, String> connection;
 
-    public void putValue(String key, String value) {
-        connection.sync().setex(key, Duration.ofHours(24).getSeconds(), value);
+    public void putValue(String key, String value, Long duration) {
+        connection.sync().setex(key, Duration.ofMinutes(duration).getSeconds(), value);
     }
 
     public String getValue(String key) {
