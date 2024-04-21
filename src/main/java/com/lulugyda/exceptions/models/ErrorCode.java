@@ -33,7 +33,17 @@ public enum ErrorCode {
     // User
     USER_NOT_FOUND("0014", "User Not Found"),
 
-    INVALID_USERNAME_OR_PASSWORD("0015", "Invalid Username Or Password");
+    USERNAME_EXIST("0015", "Username Already Exists"),
+
+    LOGIN_FAILED("0016", "Login failed"),
+
+    INVALID_USERNAME_OR_PASSWORD("0017", "Invalid Username Or Password"),
+
+    TOKEN_GENERATION_FAILED("0018", "Token generation failed"),
+
+    INVALID_OTP("0019", "Invalid OTP"),
+
+    TWILIO("0020", "Error sending OTP");
 
 
     @Getter

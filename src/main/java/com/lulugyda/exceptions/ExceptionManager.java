@@ -2,6 +2,7 @@ package com.lulugyda.exceptions;
 
 import com.lulugyda.exceptions.models.ErrorCode;
 import com.lulugyda.utils.Constants;
+import com.twilio.exception.TwilioException;
 import io.micronaut.data.exceptions.DataAccessException;
 import io.micronaut.transaction.exceptions.CannotCreateTransactionException;
 import jakarta.validation.ConstraintViolationException;
@@ -34,9 +35,17 @@ public class ExceptionManager {
         if (exception instanceof ConstraintViolationException) {
             throw new ConstraintViolationException(((ConstraintViolationException) exception).getConstraintViolations());
         }
-        if (exception instanceof WrongPasswordException) {
-            throw new MovieException(ErrorCode.WRONG_PASSWORD.getId(),
-                    ErrorCode.WRONG_PASSWORD.getMessage());
+        if (exception instanceof InvalidUsernameOrPasswordException) {
+            throw new MovieException(ErrorCode.INVALID_USERNAME_OR_PASSWORD.getId(),
+                    ErrorCode.INVALID_USERNAME_OR_PASSWORD.getMessage());
+        }
+        if (exception instanceof UsernameAlreadyExistException) {
+            throw new MovieException(ErrorCode.USERNAME_EXIST.getId(),
+                    ErrorCode.USERNAME_EXIST.getMessage());
+        }
+        if (exception instanceof TwilioException) {
+            throw new MovieException(ErrorCode.TWILIO.getId(),
+                    ErrorCode.TWILIO.getMessage() + ":" + exception.getMessage());
         }
 
         throw new MovieException(ErrorCode.INTERNAL_SERVER_ERROR.getId(),
