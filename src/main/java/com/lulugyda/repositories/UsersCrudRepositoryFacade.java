@@ -2,6 +2,7 @@ package com.lulugyda.repositories;
 
 import com.lulugyda.exceptions.InvalidUsernameOrPasswordException;
 import com.lulugyda.exceptions.UserNotFoundException;
+import com.lulugyda.exceptions.UsernameAlreadyExistException;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
 import com.lulugyda.security.BCryptPasswordEncoderService;
@@ -28,6 +29,11 @@ public class UsersCrudRepositoryFacade {
     public UserEntity saveUser(UserEntity userEntity) {
         try {
             log.info("saveUser:: saving new user");
+            Optional<UserEntity> user = usersCrudRepository.findByUsername(userEntity.getUsername());
+            if(user.isPresent()) {
+                throw new UsernameAlreadyExistException();
+            }
+
             return  usersCrudRepository.save(userEntity);
         } catch (Exception exception) {
             log.error("saveUser:: Exception when saving a new user");
