@@ -2,7 +2,9 @@ package com.lulugyda.controllers;
 
 import com.lulugyda.models.dtos.MovieEntityDto;
 import com.lulugyda.models.entities.MovieEntity;
+import com.lulugyda.models.entities.UserEntity;
 import com.lulugyda.models.responses.MovieListResponse;
+import com.lulugyda.repositories.UsersCrudRepositoryFacade;
 import com.lulugyda.services.MovieService;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
@@ -28,6 +30,7 @@ import io.micronaut.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller("v1/movies")
@@ -37,6 +40,7 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    private final UsersCrudRepositoryFacade usersCrudRepositoryFacade;
 
     @Get(produces = APPLICATION_JSON)
     @Operation(description = "Discover Movies")
@@ -116,7 +120,8 @@ public class MovieController {
                                            Authentication authentication) {
 
         Integer userId =  getUserId(authentication);
-        movieService.addPhoneNumbers(numbers,userId);
+        Optional<UserEntity> user = usersCrudRepositoryFacade.findUser(userId);
+        movieService.addPhoneNumbers(numbers,user.get());
 
         return HttpResponse.ok();
     }

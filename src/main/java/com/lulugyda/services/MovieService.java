@@ -3,7 +3,6 @@ package com.lulugyda.services;
 import com.lulugyda.models.dtos.MovieEntityDto;
 import com.lulugyda.models.entities.MovieEntity;
 import com.lulugyda.models.entities.UserEntity;
-import com.lulugyda.models.responses.MovieDetailsResponse;
 import com.lulugyda.models.responses.MovieListResponse;
 
 import java.util.ArrayList;
@@ -16,9 +15,7 @@ public interface MovieService {
 
     List<MovieEntity> saveUserMovies(Integer userId, List<MovieEntity> movieEntity);
 
-    void registerUser (UserEntity userEntity);
-
-    void addPhoneNumbers (ArrayList<String> numbers, Integer userّId);
+    void addPhoneNumbers (ArrayList<String> numbers, UserEntity user);
 
     List<MovieEntityDto> findUserMovies(Integer userId);
 
